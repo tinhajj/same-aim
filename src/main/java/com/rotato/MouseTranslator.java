@@ -4,14 +4,10 @@ import java.awt.AWTException;
 import java.awt.MouseInfo;
 import java.awt.Robot;
 
-public class MouseTranslator {
-	private Robot robot;
-	
-	public MouseTranslator() {
-	}
-	
-	public void setRobot() throws AWTException {
-		robot = new Robot();
+public class MouseTranslator extends Robot {
+
+	public MouseTranslator() throws AWTException {
+		super();
 	}
 	
 	public Point currentPos() {
@@ -28,7 +24,7 @@ public class MouseTranslator {
 			int xPos = curPos.getX();
 			int yPos = curPos.getY();
 			
-			robot.mouseMove(xPos + x, yPos + y);
+			mouseMove(xPos + x, yPos + y);
 			Thread.sleep(sleep);
 		}
 	}

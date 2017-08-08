@@ -1,16 +1,17 @@
 package com.rotato;
 import java.awt.AWTException;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 
 public class TestRunner {
 
 	public static void main(String[] args) throws AWTException, InterruptedException, NativeHookException {
-		//MouseTranslator mover = new MouseTranslator();
+		Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+		logger.setLevel(Level.OFF);
+		logger.setUseParentHandlers(false);
 		
-		//mover.translate(1, 2, 100, 20);
-
 		try {
 			GlobalScreen.registerNativeHook();
 		}

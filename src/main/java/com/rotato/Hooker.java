@@ -1,29 +1,36 @@
 package com.rotato;
 
-import org.jnativehook.GlobalScreen;
-import org.jnativehook.NativeHookException;
+import java.awt.AWTException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
 public class Hooker implements NativeKeyListener {
+	int counter = 0; 
+	
 	public void nativeKeyPressed(NativeKeyEvent e) {
-		System.out.println("Key Pressed: " + NativeKeyEvent.getKeyText(e.getKeyCode()));
-
-		if (e.getKeyCode() == NativeKeyEvent.VC_ESCAPE) {
+		if (e.getKeyCode() == 57421) {
 			try {
-				GlobalScreen.unregisterNativeHook();
-			} catch (NativeHookException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				MouseTranslator mover = new MouseTranslator();
+				mover.translate(1, 0, 3, 5);
+				counter++;
+			} catch (AWTException | InterruptedException err) {
+				err.printStackTrace();
 			}
 		}
+		
+		if (e.getKeyCode() == 57419) {
+			System.out.println("The number of calls is: " + counter);
+		}
+		
+		if (e.getKeyCode() == 57416) {
+			System.out.println("Reset counter to zero");
+			counter = 0;
+		}
+		
+		if (e.getKeyCode() == 57416) {	}
 	}
 
-	public void nativeKeyReleased(NativeKeyEvent e) {
-		System.out.println("Key Released: " + NativeKeyEvent.getKeyText(e.getKeyCode()));
-	}
+	public void nativeKeyReleased(NativeKeyEvent e) {	}
 
-	public void nativeKeyTyped(NativeKeyEvent e) {
-		System.out.println("Key Typed: " + e.getKeyText(e.getKeyCode()));
-	}
+	public void nativeKeyTyped(NativeKeyEvent e) {	}
 }

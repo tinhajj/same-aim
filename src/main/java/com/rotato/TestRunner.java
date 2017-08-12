@@ -1,4 +1,5 @@
 package com.rotato;
+
 import java.awt.AWTException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -11,7 +11,7 @@ public class Hooker implements NativeKeyListener {
 		if (e.getKeyCode() == 57421) {
 			try {
 				MouseTranslator mover = new MouseTranslator();
-				mover.translate(1, 0, 3, 5);
+				mover.translate(1, 0);
 				counter++;
 			} catch (AWTException | InterruptedException err) {
 				err.printStackTrace();

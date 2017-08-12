@@ -1,19 +1,31 @@
 package com.rotato;
 
 import java.awt.AWTException;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
 public class Hooker implements NativeKeyListener {
-	int counter = 0; 
+	public int counter;
+	public MouseTranslator mover;
+	public WindowCapture screenGrabber;
+
+	public Hooker() throws AWTException {
+		counter = 0;
+		mover = new MouseTranslator();
+		screenGrabber = new WindowCapture();
+	}
 	
 	public void nativeKeyPressed(NativeKeyEvent e) {
 		if (e.getKeyCode() == 57421) {
 			try {
-				MouseTranslator mover = new MouseTranslator();
 				mover.translate(1, 0);
 				counter++;
-			} catch (AWTException | InterruptedException err) {
+			} catch (InterruptedException err) {
 				err.printStackTrace();
 			}
 		}
@@ -27,7 +39,15 @@ public class Hooker implements NativeKeyListener {
 			counter = 0;
 		}
 		
-		if (e.getKeyCode() == 57416) {	}
+		if (e.getKeyCode() == 57424) {
+			BufferedImage bufferedImage = screenGrabber.screenshot();
+			File outputfile = new File("C:\\Users\\water\\image.jpg");
+			try {
+				ImageIO.write(bufferedImage, "jpg", outputfile);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
 	}
 
 	public void nativeKeyReleased(NativeKeyEvent e) {	}

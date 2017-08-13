@@ -3,6 +3,7 @@ package com.rotato;
 import java.awt.AWTException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 
@@ -12,7 +13,7 @@ public class TestRunner {
 		Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
 		logger.setLevel(Level.OFF);
 		logger.setUseParentHandlers(false);
-		
+
 		try {
 			GlobalScreen.registerNativeHook();
 		}

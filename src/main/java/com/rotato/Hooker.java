@@ -26,6 +26,7 @@ public class Hooker implements NativeKeyListener {
 		if (e.getKeyCode() == 57421) {
 			try {
 				mover.translate(1, 0);
+				//mover.translate( (x) -> (int) ( 10 * Math.cos(x) ), 100);
 				counter++;
 			} catch (InterruptedException err) {
 				err.printStackTrace();

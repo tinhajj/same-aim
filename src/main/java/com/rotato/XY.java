@@ -1,15 +1,15 @@
 package com.rotato;
 
-public class Point {
+public class XY {
 	private int x;
 	private int y;
 	
-	public Point(int x, int y) {
+	public XY(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 	
-	public Point() {}
+	public XY() {}
 	
 	public int getX() {
 		return x;

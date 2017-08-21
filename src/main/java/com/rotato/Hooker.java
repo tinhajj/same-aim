@@ -2,7 +2,6 @@ package com.rotato;
 
 import java.awt.AWTException;
 import java.awt.image.BufferedImage;
-import java.util.function.Function;
 
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
@@ -26,14 +25,7 @@ public class Hooker implements NativeKeyListener {
 	public void nativeKeyPressed(NativeKeyEvent e) {
 		if (e.getKeyCode() == 57421) {
 			try {
-				//mover.translate(1, 0);
-
-				BufferedImage img1 = screenGrabber.screenshot();
-				mover.translate( sin(), (x) -> ( (x <= 25) ? -x + 100 : 25), 500);
-				mover.translate( negsin(), (x) -> ( (x <= 25) ? -x + 100 : 25), 500);
-				BufferedImage img2 = screenGrabber.screenshot();
-				System.out.println(ImageUtils.compare(img1, img2));
-
+				mover.translate(1, 0);
 				counter++;
 			} catch (Exception err) {
 				err.printStackTrace();
@@ -67,23 +59,6 @@ public class Hooker implements NativeKeyListener {
 				}
 			}
 		}
-	}
-
-	public Function<Integer, XY> sin() {
-		return step -> {
-			double x = (double) step / 10;
-			int y = (int) ( 30 * Math.sin(x) );
-			return new XY( (int) x, y );
-		};
-	}
-
-	// Delete this later, just add more parameters to sin()
-	public Function<Integer, XY> negsin() {
-		return step -> {
-			double x = (double) step / 10;
-			int y = (int) ( -30 * Math.sin(x) );
-			return new XY( (int) -x, -y );
-		};
 	}
 
 	@Override

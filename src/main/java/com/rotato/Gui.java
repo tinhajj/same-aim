@@ -7,7 +7,7 @@ import javax.swing.UIManager;
 
 public class Gui {
 
-	private JFrame frame;
+	private JFrame frmSameAim;
 
 	/**
 	 * Launch the application.
@@ -23,7 +23,7 @@ public class Gui {
 			public void run() {
 				try {
 					Gui window = new Gui();
-					window.frame.setVisible(true);
+					window.frmSameAim.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -42,9 +42,10 @@ public class Gui {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmSameAim = new JFrame();
+		frmSameAim.setTitle("Same Aim");
+		frmSameAim.setBounds(100, 100, 450, 300);
+		frmSameAim.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 }

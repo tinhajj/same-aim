@@ -11,4 +11,4 @@ dependencies {
     compile group: 'com.1stleg', name: 'jnativehook', version: '2.1.0'
 }
 
-mainClassName = 'com.rotato.Gui'
+mainClassName = 'com.rotato.TestRunner'

@@ -25,7 +25,7 @@ public class Hooker implements NativeKeyListener {
 	public void nativeKeyPressed(NativeKeyEvent e) {
 		if (e.getKeyCode() == 57421) {
 			try {
-				mover.translate(1, 0);
+				mover.translate(0, 5);
 				counter++;
 			} catch (Exception err) {
 				err.printStackTrace();
@@ -42,21 +42,11 @@ public class Hooker implements NativeKeyListener {
 		}
 
 		if (e.getKeyCode() == 57424) {
-			BufferedImage bufferedImage = screenGrabber.screenshot();
-			screenshots.add(bufferedImage);
-
-			if (screenshots.size() == 2) {
-				BufferedImage img1;
-				BufferedImage img2;
-
-				img1 = screenshots.poll();
-				img2 = screenshots.poll();
-
-				try {
-					System.out.println(ImageUtils.compare(img1, img2));
-				} catch (DimensionsMismatchException e1) {
-					e1.printStackTrace();
-				}
+			try {
+				mover.translate(5, 0);
+				counter++;
+			} catch (Exception err) {
+				err.printStackTrace();
 			}
 		}
 	}

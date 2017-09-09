@@ -1,9 +1,13 @@
 package com.rotato;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+
+import com.rotato.view.Console;
+import com.rotato.view.Hotkeys;
 
 public class Gui {
 
@@ -46,6 +50,12 @@ public class Gui {
 		frmSameAim.setTitle("Same Aim");
 		frmSameAim.setBounds(100, 100, 450, 300);
 		frmSameAim.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		Hotkeys hotkeys = new Hotkeys();
+		frmSameAim.getContentPane().add(hotkeys, BorderLayout.NORTH);
+
+		Console console = new Console();
+		frmSameAim.getContentPane().add(console, BorderLayout.SOUTH);
 	}
 
 }

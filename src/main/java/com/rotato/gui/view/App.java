@@ -1,4 +1,4 @@
-package com.rotato;
+package com.rotato.gui.view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -6,10 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
-import com.rotato.view.Console;
-import com.rotato.view.Hotkeys;
-
-public class Gui {
+public class App {
 
 	private JFrame frmSameAim;
 
@@ -26,7 +23,7 @@ public class Gui {
 			@Override
 			public void run() {
 				try {
-					Gui window = new Gui();
+					App window = new App();
 					window.frmSameAim.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +35,7 @@ public class Gui {
 	/**
 	 * Create the application.
 	 */
-	public Gui() {
+	public App() {
 		initialize();
 	}
 

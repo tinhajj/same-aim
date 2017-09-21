@@ -1,4 +1,4 @@
-package com.rotato;
+package com.rotato.aim;
 
 import java.awt.AWTException;
 import java.awt.image.BufferedImage;

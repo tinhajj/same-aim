@@ -1,4 +1,4 @@
-package com.rotato.view;
+package com.rotato.gui.view;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

@@ -1,4 +1,4 @@
-package com.rotato;
+package com.rotato.aim;
 
 public class XY {
 	private int x;

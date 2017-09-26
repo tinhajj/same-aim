@@ -6,12 +6,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
-public class Console extends JPanel {
+public class ConsoleView extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public Console() {
+	public ConsoleView() {
 		setLayout(new BorderLayout(0, 0));
 
 		JScrollPane scrollPane = new JScrollPane();

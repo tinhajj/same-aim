@@ -48,10 +48,10 @@ public class App {
 		frmSameAim.setBounds(100, 100, 450, 300);
 		frmSameAim.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		Hotkeys hotkeys = new Hotkeys();
+		HotkeyView hotkeys = new HotkeyView();
 		frmSameAim.getContentPane().add(hotkeys, BorderLayout.NORTH);
 
-		Console console = new Console();
+		ConsoleView console = new ConsoleView();
 		frmSameAim.getContentPane().add(console, BorderLayout.SOUTH);
 	}
 

@@ -1,22 +1,20 @@
 package com.rotato.gui.model;
 
+import java.util.HashMap;
+
 public class Hotkey {
-	private String name = "Not Set";
+	private HashMap<String, String> Hotkeys = new HashMap<String, String>();
 	private String action;
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String key, String name) {
+		Hotkeys.put(key, name);
 	}
 
-	public String getName() {
-		return this.name;
+	public String getAction(String key) {
+		return Hotkeys.get(key);
 	}
 
-	public String getAction() {
-		return action;
-	}
-
-	public void setAction(String action) {
-		this.action = action;
+	public void setAction(String key, String action) {
+		Hotkeys.put(key, action);
 	}
 }

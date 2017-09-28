@@ -6,7 +6,7 @@ public class Hotkey {
 	private HashMap<String, String> Hotkeys = new HashMap<String, String>();
 	private String action;
 
-	public void setName(String key, String name) {
+	public void setKey(String key, String name) {
 		Hotkeys.put(key, name);
 	}
 

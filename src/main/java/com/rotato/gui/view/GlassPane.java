@@ -1,13 +1,22 @@
 package com.rotato.gui.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.SystemColor;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 public class GlassPane extends JPanel {
+
 	public GlassPane() {
-		setBackground(new Color(255, 228, 181));
-		this.setSize(new Dimension(300, 300));
+		setBackground(SystemColor.info);
+	}
+
+	@Override
+	public void setVisible(boolean on) {
+		JFrame frame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class,
+				this);
+		frame.setGlassPane(this);
+		super.setVisible(on);
 	}
 }

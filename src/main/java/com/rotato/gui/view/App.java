@@ -49,7 +49,7 @@ public class App {
 		frmSameAim.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		HotkeyView hotkeys = new HotkeyView();
-		frmSameAim.getContentPane().add(hotkeys, BorderLayout.CENTER);
+		frmSameAim.getContentPane().add(hotkeys, BorderLayout.NORTH);
 
 		ConsoleView console = new ConsoleView();
 		frmSameAim.getContentPane().add(console, BorderLayout.SOUTH);

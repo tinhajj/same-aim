@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 
 public class HotkeyView extends JLayeredPane {
 
@@ -16,77 +15,70 @@ public class HotkeyView extends JLayeredPane {
 	 * Create the panel.
 	 */
 	public HotkeyView() {
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[] { 100, 100, 0 };
+		gridBagLayout.rowHeights = new int[] { 50, 50, 50, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		setLayout(gridBagLayout);
 
-		GlassPane glassPane = new GlassPane();
-		glassPane.setVisible(false);
+		JButton btnMoveLeft = new JButton("Move Left");
+		setLayer(btnMoveLeft, 1);
+		GridBagConstraints gbc_btnMoveLeft = new GridBagConstraints();
+		gbc_btnMoveLeft.fill = GridBagConstraints.BOTH;
+		gbc_btnMoveLeft.insets = new Insets(0, 0, 5, 5);
+		gbc_btnMoveLeft.gridx = 0;
+		gbc_btnMoveLeft.gridy = 0;
+		add(btnMoveLeft, gbc_btnMoveLeft);
 
-		JPanel panel = new JPanel();
-		setLayer(panel, 0);
-		panel.setBounds(10, 11, 232, 140);
-		add(panel);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{10, 10, 10};
-		gbl_panel.rowHeights = new int[]{40, 40, 40};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0};
-		panel.setLayout(gbl_panel);
+		JButton btnResetCounter = new JButton("Reset Counter");
+		setLayer(btnResetCounter, 1);
+		GridBagConstraints gbc_btnResetCounter = new GridBagConstraints();
+		gbc_btnResetCounter.fill = GridBagConstraints.BOTH;
+		gbc_btnResetCounter.insets = new Insets(0, 0, 5, 0);
+		gbc_btnResetCounter.gridx = 1;
+		gbc_btnResetCounter.gridy = 0;
+		add(btnResetCounter, gbc_btnResetCounter);
 
-		JButton button = new JButton("Move Left");
-		GridBagConstraints gbc_button = new GridBagConstraints();
-		gbc_button.fill = GridBagConstraints.BOTH;
-		gbc_button.insets = new Insets(0, 0, 5, 5);
-		gbc_button.gridx = 0;
-		gbc_button.gridy = 0;
-		panel.add(button, gbc_button);
+		JButton btnPrintCounter = new JButton("Print Counter");
+		setLayer(btnPrintCounter, 1);
+		GridBagConstraints gbc_btnPrintCounter = new GridBagConstraints();
+		gbc_btnPrintCounter.fill = GridBagConstraints.BOTH;
+		gbc_btnPrintCounter.insets = new Insets(0, 0, 5, 0);
+		gbc_btnPrintCounter.gridx = 1;
+		gbc_btnPrintCounter.gridy = 1;
+		add(btnPrintCounter, gbc_btnPrintCounter);
 
-		JButton button_2 = new JButton("Print Counter");
-		GridBagConstraints gbc_button_2 = new GridBagConstraints();
-		gbc_button_2.insets = new Insets(0, 0, 5, 0);
-		gbc_button_2.fill = GridBagConstraints.BOTH;
-		gbc_button_2.gridx = 1;
-		gbc_button_2.gridy = 0;
-		panel.add(button_2, gbc_button_2);
+		JButton btnNewButton_2 = new JButton("Move Down");
+		setLayer(btnNewButton_2, 1);
+		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
+		gbc_btnNewButton_2.fill = GridBagConstraints.BOTH;
+		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_2.gridx = 0;
+		gbc_btnNewButton_2.gridy = 1;
+		add(btnNewButton_2, gbc_btnNewButton_2);
 
-		JButton button_3 = new JButton("Move Down");
-		GridBagConstraints gbc_button_3 = new GridBagConstraints();
-		gbc_button_3.fill = GridBagConstraints.BOTH;
-		gbc_button_3.insets = new Insets(0, 0, 5, 5);
-		gbc_button_3.gridx = 0;
-		gbc_button_3.gridy = 1;
-		panel.add(button_3, gbc_button_3);
+		JButton btnNewButton = new JButton("Not Implemented");
+		setLayer(btnNewButton, 1);
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
+		gbc_btnNewButton.gridx = 0;
+		gbc_btnNewButton.gridy = 2;
+		add(btnNewButton, gbc_btnNewButton);
 
-		JButton button_1 = new JButton("Reset Counter");
-		GridBagConstraints gbc_button_1 = new GridBagConstraints();
-		gbc_button_1.fill = GridBagConstraints.BOTH;
-		gbc_button_1.gridx = 1;
-		gbc_button_1.insets = new Insets(0, 0, 5, 0);
-		gbc_button_1.gridy = 1;
-		panel.add(button_1, gbc_button_1);
-
-		JButton button_4 = new JButton("Not Implemented");
-		button_4.addActionListener(new ActionListener() {
+		JButton btnNotImplemented = new JButton("Not Implemented");
+		setLayer(btnNotImplemented, 1);
+		btnNotImplemented.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				glassPane.setVisible(true);
 			}
 		});
-		GridBagConstraints gbc_button_4 = new GridBagConstraints();
-		gbc_button_4.fill = GridBagConstraints.BOTH;
-		gbc_button_4.insets = new Insets(0, 0, 5, 5);
-		gbc_button_4.gridx = 0;
-		gbc_button_4.gridy = 2;
-		panel.add(button_4, gbc_button_4);
-
-		JButton button_5 = new JButton("Not Implemented");
-		GridBagConstraints gbc_button_5 = new GridBagConstraints();
-		gbc_button_5.fill = GridBagConstraints.BOTH;
-		gbc_button_5.insets = new Insets(0, 0, 5, 0);
-		gbc_button_5.gridx = 1;
-		gbc_button_5.gridy = 2;
-		panel.add(button_5, gbc_button_5);
-		setLayer(glassPane, 1);
-		glassPane.setBounds(10, 11, 232, 140);
-		add(glassPane);
+		GridBagConstraints gbc_btnNotImplemented = new GridBagConstraints();
+		gbc_btnNotImplemented.fill = GridBagConstraints.BOTH;
+		gbc_btnNotImplemented.gridx = 1;
+		gbc_btnNotImplemented.gridy = 2;
+		add(btnNotImplemented, gbc_btnNotImplemented);
 
 	}
 }

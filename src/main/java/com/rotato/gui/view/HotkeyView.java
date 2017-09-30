@@ -15,14 +15,11 @@ public class HotkeyView extends JPanel {
 	 * Create the panel.
 	 */
 	public HotkeyView() {
-		GlassPane gp = new GlassPane(); // This is for testing remove this later
-		add(gp);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{100, 100, 0};
-		gridBagLayout.rowHeights = new int[]{50, 50, 50, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0,
-				Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] { 100, 100, 0 };
+		gridBagLayout.rowHeights = new int[] { 50, 50, 50, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		JButton btnMoveLeft = new JButton("Move Left");
@@ -69,8 +66,6 @@ public class HotkeyView extends JPanel {
 		btnNotImplemented.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("here");
-				gp.setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_btnNotImplemented = new GridBagConstraints();

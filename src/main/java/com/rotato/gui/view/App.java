@@ -46,10 +46,11 @@ public class App {
 	private void initialize() {
 		frmSameAim = new JFrame();
 		frmSameAim.setTitle("Same Aim");
-		frmSameAim.setBounds(100, 100, 259, 336);
+		frmSameAim.setBounds(100, 100, 311, 382);
+		frmSameAim.setLocationRelativeTo(null);
 		frmSameAim.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		HotkeyView hotkeys = new HotkeyView();
+		HotkeyView hotkeys = new HotkeyView(frmSameAim);
 		GridBagLayout gridBagLayout = (GridBagLayout) hotkeys.getLayout();
 		gridBagLayout.columnWidths = new int[]{100, 100};
 		gridBagLayout.rowHeights = new int[]{50, 50, 50};

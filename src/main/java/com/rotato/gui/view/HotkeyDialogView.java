@@ -1,30 +1,31 @@
 package com.rotato.gui.view;
 
 import java.awt.BorderLayout;
-import java.awt.Frame;
 
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class HotkeyDialogView extends JDialog {
 	private JLabel lblNewLabel;
+	private JFrame owner;
 
-	HotkeyDialogView(Frame owner) {
+	HotkeyDialogView(JFrame owner) {
 		super(owner, true);
-		setTitle("Set a Hotkey");
 
-		JPanel panel = new JPanel();
-		getContentPane().add(panel, BorderLayout.SOUTH);
+		this.setLayout(new BorderLayout());
+
+		this.owner = owner;
+
+		setTitle("Set a Hotkey");
 
 		lblNewLabel = new JLabel("Press A Key");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-		panel.add(lblNewLabel);
+		this.add(lblNewLabel);
 
-		pack();
-		setLocationRelativeTo(owner);
+		this.setLocationRelativeTo(owner);
 	}
 
 	public void hideDialog() {
@@ -33,6 +34,7 @@ public class HotkeyDialogView extends JDialog {
 	}
 
 	public void showDialog(String message) {
+		setLocationRelativeTo(owner);
 		lblNewLabel.setText("Set a hotkey for: [" + message + "]");
 		setVisible(true);
 	}

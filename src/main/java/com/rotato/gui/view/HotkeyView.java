@@ -9,15 +9,16 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 public class HotkeyView extends JPanel {
 	private JFrame frame;
 
 	/**
 	 * Create the panel.
+	 *
+	 * @param frmSameAim
 	 */
-	public HotkeyView() {
+	public HotkeyView(JFrame frmSameAim) {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{100, 100, 0};
 		gridBagLayout.rowHeights = new int[]{50, 50, 50, 0, 0};
@@ -26,8 +27,7 @@ public class HotkeyView extends JPanel {
 				Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 
-		JFrame frame = (JFrame) SwingUtilities.getRoot(this);
-		HotkeyDialogView hotkeyDialogView = new HotkeyDialogView(frame);
+		HotkeyDialogView hotkeyDialogView = new HotkeyDialogView(frmSameAim);
 
 		JButton btnMoveLeft = new JButton("Move Left");
 		GridBagConstraints gbc_btnMoveLeft = new GridBagConstraints();

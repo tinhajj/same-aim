@@ -1,6 +1,7 @@
 package com.rotato.gui.view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -13,8 +14,9 @@ public class HotkeyDialogView extends JDialog {
 
 	HotkeyDialogView(JFrame owner) {
 		super(owner, true);
+		setSize(new Dimension(277, 169));
 
-		this.setLayout(new BorderLayout());
+		getContentPane().setLayout(new BorderLayout());
 
 		this.owner = owner;
 
@@ -23,7 +25,7 @@ public class HotkeyDialogView extends JDialog {
 		lblNewLabel = new JLabel("Press A Key");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-		this.add(lblNewLabel);
+		getContentPane().add(lblNewLabel, BorderLayout.SOUTH);
 
 		this.setLocationRelativeTo(owner);
 	}

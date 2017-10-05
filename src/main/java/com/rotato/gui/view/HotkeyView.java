@@ -20,16 +20,21 @@ public class HotkeyView extends JPanel {
 	 */
 	public HotkeyView(JFrame frmSameAim) {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{100, 100, 0};
-		gridBagLayout.rowHeights = new int[]{50, 50, 50, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0,
-				Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{100, 100};
+		gridBagLayout.rowHeights = new int[]{50, 50};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0};
 		setLayout(gridBagLayout);
 
 		HotkeyDialogView hotkeyDialogView = new HotkeyDialogView(frmSameAim);
 
 		JButton btnMoveLeft = new JButton("Move Left");
+		btnMoveLeft.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				hotkeyDialogView.showDialog("Move Left");
+			}
+		});
 		GridBagConstraints gbc_btnMoveLeft = new GridBagConstraints();
 		gbc_btnMoveLeft.fill = GridBagConstraints.BOTH;
 		gbc_btnMoveLeft.insets = new Insets(0, 0, 5, 5);
@@ -60,27 +65,5 @@ public class HotkeyView extends JPanel {
 		gbc_btnNewButton_2.gridx = 0;
 		gbc_btnNewButton_2.gridy = 1;
 		add(btnNewButton_2, gbc_btnNewButton_2);
-
-		JButton btnNewButton = new JButton("Not Implemented");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
-		gbc_btnNewButton.gridx = 0;
-		gbc_btnNewButton.gridy = 2;
-		add(btnNewButton, gbc_btnNewButton);
-
-		JButton btnNotImplemented = new JButton("Not Implemented");
-		btnNotImplemented.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				hotkeyDialogView.showDialog("Not Implemented");
-			}
-		});
-		GridBagConstraints gbc_btnNotImplemented = new GridBagConstraints();
-		gbc_btnNotImplemented.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNotImplemented.fill = GridBagConstraints.BOTH;
-		gbc_btnNotImplemented.gridx = 1;
-		gbc_btnNotImplemented.gridy = 2;
-		add(btnNotImplemented, gbc_btnNotImplemented);
 	}
 }

@@ -14,7 +14,7 @@ public class HotkeyDialogView extends JDialog {
 
 	HotkeyDialogView(JFrame owner) {
 		super(owner, true);
-		setSize(new Dimension(277, 169));
+		setSize(new Dimension(214, 170));
 
 		getContentPane().setLayout(new BorderLayout());
 

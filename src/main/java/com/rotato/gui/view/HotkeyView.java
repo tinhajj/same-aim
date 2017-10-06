@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +13,7 @@ import javax.swing.JPanel;
 
 public class HotkeyView extends JPanel {
 	private JFrame frame;
+	private ArrayList<JButton> buttons;
 
 	/**
 	 * Create the panel.
@@ -19,6 +21,8 @@ public class HotkeyView extends JPanel {
 	 * @param frmSameAim
 	 */
 	public HotkeyView(JFrame frmSameAim) {
+		buttons = new ArrayList<JButton>();
+
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{100, 100};
 		gridBagLayout.rowHeights = new int[]{50, 50};
@@ -29,18 +33,13 @@ public class HotkeyView extends JPanel {
 		HotkeyDialogView hotkeyDialogView = new HotkeyDialogView(frmSameAim);
 
 		JButton btnMoveLeft = new JButton("Move Left");
-		btnMoveLeft.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				hotkeyDialogView.showDialog("Move Left");
-			}
-		});
 		GridBagConstraints gbc_btnMoveLeft = new GridBagConstraints();
 		gbc_btnMoveLeft.fill = GridBagConstraints.BOTH;
 		gbc_btnMoveLeft.insets = new Insets(0, 0, 5, 5);
 		gbc_btnMoveLeft.gridx = 0;
 		gbc_btnMoveLeft.gridy = 0;
 		add(btnMoveLeft, gbc_btnMoveLeft);
+		buttons.add(btnMoveLeft);
 
 		JButton btnResetCounter = new JButton("Reset Counter");
 		GridBagConstraints gbc_btnResetCounter = new GridBagConstraints();
@@ -49,6 +48,7 @@ public class HotkeyView extends JPanel {
 		gbc_btnResetCounter.gridx = 1;
 		gbc_btnResetCounter.gridy = 0;
 		add(btnResetCounter, gbc_btnResetCounter);
+		buttons.add(btnResetCounter);
 
 		JButton btnPrintCounter = new JButton("Print Counter");
 		GridBagConstraints gbc_btnPrintCounter = new GridBagConstraints();
@@ -57,13 +57,24 @@ public class HotkeyView extends JPanel {
 		gbc_btnPrintCounter.gridx = 1;
 		gbc_btnPrintCounter.gridy = 1;
 		add(btnPrintCounter, gbc_btnPrintCounter);
+		buttons.add(btnPrintCounter);
 
-		JButton btnNewButton_2 = new JButton("Move Down");
-		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
-		gbc_btnNewButton_2.fill = GridBagConstraints.BOTH;
-		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_2.gridx = 0;
-		gbc_btnNewButton_2.gridy = 1;
-		add(btnNewButton_2, gbc_btnNewButton_2);
+		JButton btnMoveDown = new JButton("Move Down");
+		GridBagConstraints gbc_btnMoveDown = new GridBagConstraints();
+		gbc_btnMoveDown.fill = GridBagConstraints.BOTH;
+		gbc_btnMoveDown.insets = new Insets(0, 0, 5, 5);
+		gbc_btnMoveDown.gridx = 0;
+		gbc_btnMoveDown.gridy = 1;
+		add(btnMoveDown, gbc_btnMoveDown);
+		buttons.add(btnMoveDown);
+
+		for (JButton button : buttons) {
+			button.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					hotkeyDialogView.showDialog(button.getText());
+				}
+			});
+		}
 	}
 }

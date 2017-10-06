@@ -7,6 +7,9 @@ import java.awt.GridBagLayout;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
+import com.rotato.gui.controller.HotkeyController;
+import com.rotato.gui.model.Hotkey;
+
 public class App {
 
 	private JFrame frmSameAim;
@@ -50,11 +53,16 @@ public class App {
 		frmSameAim.setLocationRelativeTo(null);
 		frmSameAim.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		HotkeyView hotkeys = new HotkeyView(frmSameAim);
-		GridBagLayout gridBagLayout = (GridBagLayout) hotkeys.getLayout();
+		HotkeyView hotkeyView = new HotkeyView(frmSameAim);
+		Hotkey hotkeyModel = new Hotkey();
+
+		HotkeyController hotkeyController = new HotkeyController(hotkeyModel,
+				hotkeyView);
+
+		GridBagLayout gridBagLayout = (GridBagLayout) hotkeyView.getLayout();
 		gridBagLayout.columnWidths = new int[]{100, 100};
 		gridBagLayout.rowHeights = new int[]{50, 50, 50};
-		frmSameAim.getContentPane().add(hotkeys, BorderLayout.NORTH);
+		frmSameAim.getContentPane().add(hotkeyView, BorderLayout.NORTH);
 
 		ConsoleView console = new ConsoleView();
 		frmSameAim.getContentPane().add(console, BorderLayout.SOUTH);

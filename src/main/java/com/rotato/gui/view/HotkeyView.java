@@ -3,17 +3,15 @@ package com.rotato.gui.view;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class HotkeyView extends JPanel {
 	private JFrame frame;
-	private ArrayList<JButton> buttons;
+	private ArrayList<HotkeyButton> buttons;
 
 	/**
 	 * Create the panel.
@@ -21,18 +19,18 @@ public class HotkeyView extends JPanel {
 	 * @param frmSameAim
 	 */
 	public HotkeyView(JFrame frmSameAim) {
-		buttons = new ArrayList<JButton>();
+		buttons = new ArrayList<HotkeyButton>();
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{100, 100};
-		gridBagLayout.rowHeights = new int[]{50, 50};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0};
+		gridBagLayout.columnWidths = new int[] { 100, 100 };
+		gridBagLayout.rowHeights = new int[] { 50, 50 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0 };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0 };
 		setLayout(gridBagLayout);
 
 		HotkeyDialogView hotkeyDialogView = new HotkeyDialogView(frmSameAim);
 
-		JButton btnMoveLeft = new JButton("Move Left");
+		HotkeyButton btnMoveLeft = new HotkeyButton("Move Left", hotkeyDialogView);
 		GridBagConstraints gbc_btnMoveLeft = new GridBagConstraints();
 		gbc_btnMoveLeft.fill = GridBagConstraints.BOTH;
 		gbc_btnMoveLeft.insets = new Insets(0, 0, 5, 5);
@@ -41,7 +39,7 @@ public class HotkeyView extends JPanel {
 		add(btnMoveLeft, gbc_btnMoveLeft);
 		buttons.add(btnMoveLeft);
 
-		JButton btnResetCounter = new JButton("Reset Counter");
+		HotkeyButton btnResetCounter = new HotkeyButton("Reset Counter", hotkeyDialogView);
 		GridBagConstraints gbc_btnResetCounter = new GridBagConstraints();
 		gbc_btnResetCounter.fill = GridBagConstraints.BOTH;
 		gbc_btnResetCounter.insets = new Insets(0, 0, 5, 0);
@@ -50,7 +48,7 @@ public class HotkeyView extends JPanel {
 		add(btnResetCounter, gbc_btnResetCounter);
 		buttons.add(btnResetCounter);
 
-		JButton btnPrintCounter = new JButton("Print Counter");
+		HotkeyButton btnPrintCounter = new HotkeyButton("Print Counter", hotkeyDialogView);
 		GridBagConstraints gbc_btnPrintCounter = new GridBagConstraints();
 		gbc_btnPrintCounter.fill = GridBagConstraints.BOTH;
 		gbc_btnPrintCounter.insets = new Insets(0, 0, 5, 0);
@@ -59,7 +57,7 @@ public class HotkeyView extends JPanel {
 		add(btnPrintCounter, gbc_btnPrintCounter);
 		buttons.add(btnPrintCounter);
 
-		JButton btnMoveDown = new JButton("Move Down");
+		HotkeyButton btnMoveDown = new HotkeyButton("Move Down", hotkeyDialogView);
 		GridBagConstraints gbc_btnMoveDown = new GridBagConstraints();
 		gbc_btnMoveDown.fill = GridBagConstraints.BOTH;
 		gbc_btnMoveDown.insets = new Insets(0, 0, 5, 5);
@@ -67,14 +65,11 @@ public class HotkeyView extends JPanel {
 		gbc_btnMoveDown.gridy = 1;
 		add(btnMoveDown, gbc_btnMoveDown);
 		buttons.add(btnMoveDown);
+	}
 
-		for (JButton button : buttons) {
-			button.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					hotkeyDialogView.showDialog(button.getText());
-				}
-			});
+	public void addHotkeyListener(ActionListener listener) {
+		for (HotkeyButton button : buttons) {
+			button.addActionListener(listener);
 		}
 	}
 }

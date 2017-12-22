@@ -24,7 +24,7 @@ public class TestRunner {
 			System.exit(1);
 		}
 
-		GlobalScreen.addNativeKeyListener(new Hooker());
+		GlobalScreen.addNativeKeyListener(new KeyGrabber());
 	}
 
 }

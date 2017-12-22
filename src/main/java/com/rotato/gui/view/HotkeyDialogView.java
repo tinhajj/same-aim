@@ -2,6 +2,8 @@ package com.rotato.gui.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -28,6 +30,18 @@ public class HotkeyDialogView extends JDialog {
 		getContentPane().add(lblNewLabel, BorderLayout.SOUTH);
 
 		this.setLocationRelativeTo(owner);
+
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				System.out.println("jdialog window closed event received");
+			}
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.out.println("jdialog window closing event received");
+			}
+		});
 	}
 
 	public void hideDialog() {

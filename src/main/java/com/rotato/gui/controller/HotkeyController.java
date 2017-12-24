@@ -3,8 +3,8 @@ package com.rotato.gui.controller;
 import java.awt.AWTException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
@@ -16,14 +16,11 @@ import com.rotato.gui.view.HotkeyView;
 public class HotkeyController {
 	private Hotkey model;
 	private HotkeyView view;
+	private KeyGrabber grabber;
 
-	public HotkeyController(Hotkey model, HotkeyView view) {
+	public HotkeyController(Hotkey model, HotkeyView view) throws AWTException {
 		this.model = model;
 		this.view = view;
-
-		Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
-		logger.setLevel(Level.OFF);
-		logger.setUseParentHandlers(false);
 
 		try {
 			GlobalScreen.registerNativeHook();
@@ -34,20 +31,42 @@ public class HotkeyController {
 			System.exit(1);
 		}
 
-		this.view.addHotkeyListener(new HotkeyListener());
+		this.grabber = new KeyGrabber(updateHotkey());
+		this.view.addHotkeyListener(new HotkeyListener(grabber));
+		this.view.addDialogCloseListener(new CloseDialogListener());
+	}
+
+	private Runnable updateHotkey() {
+		Runnable update = () -> {
+			// update model
+			cleanDialog();
+		};
+
+		return update;
+	}
+
+	private void cleanDialog() {
+		view.hideDialog();
+		GlobalScreen.removeNativeKeyListener(grabber);
+	}
+
+	class CloseDialogListener extends WindowAdapter {
+		@Override
+		public void windowClosing(WindowEvent arg0) {
+			cleanDialog();
+		}
 	}
 
 	class HotkeyListener implements ActionListener {
 		private KeyGrabber grabber;
 
+		public HotkeyListener(KeyGrabber grabber) {
+			this.grabber = grabber;
+		}
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			try {
-				GlobalScreen.addNativeKeyListener(new KeyGrabber());
-			} catch (AWTException g) {
-				// TODO Auto-generated catch block
-				g.printStackTrace();
-			}
+			GlobalScreen.addNativeKeyListener(grabber);
 		}
 	}
 }

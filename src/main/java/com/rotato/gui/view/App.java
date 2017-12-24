@@ -1,11 +1,16 @@
 package com.rotato.gui.view;
 
+import java.awt.AWTException;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridBagLayout;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+
+import org.jnativehook.GlobalScreen;
 
 import com.rotato.gui.controller.HotkeyController;
 import com.rotato.gui.model.Hotkey;
@@ -18,6 +23,10 @@ public class App {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+		logger.setLevel(Level.OFF);
+		logger.setUseParentHandlers(false);
+
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Throwable e) {
@@ -38,15 +47,19 @@ public class App {
 
 	/**
 	 * Create the application.
+	 *
+	 * @throws AWTException
 	 */
-	public App() {
+	public App() throws AWTException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 *
+	 * @throws AWTException
 	 */
-	private void initialize() {
+	private void initialize() throws AWTException {
 		frmSameAim = new JFrame();
 		frmSameAim.setTitle("Same Aim");
 		frmSameAim.setBounds(100, 100, 311, 382);
@@ -56,12 +69,11 @@ public class App {
 		HotkeyView hotkeyView = new HotkeyView(frmSameAim);
 		Hotkey hotkeyModel = new Hotkey();
 
-		HotkeyController hotkeyController = new HotkeyController(hotkeyModel,
-				hotkeyView);
+		HotkeyController hotkeyController = new HotkeyController(hotkeyModel, hotkeyView);
 
 		GridBagLayout gridBagLayout = (GridBagLayout) hotkeyView.getLayout();
-		gridBagLayout.columnWidths = new int[]{100, 100};
-		gridBagLayout.rowHeights = new int[]{50, 50, 50};
+		gridBagLayout.columnWidths = new int[] { 100, 100 };
+		gridBagLayout.rowHeights = new int[] { 50, 50, 50 };
 		frmSameAim.getContentPane().add(hotkeyView, BorderLayout.NORTH);
 
 		ConsoleView console = new ConsoleView();

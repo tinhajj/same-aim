@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -12,6 +13,7 @@ import javax.swing.JPanel;
 public class HotkeyView extends JPanel {
 	private JFrame frame;
 	private ArrayList<HotkeyButton> buttons;
+	private HotkeyDialogView hotkeyDialogView;
 
 	/**
 	 * Create the panel.
@@ -28,7 +30,7 @@ public class HotkeyView extends JPanel {
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0 };
 		setLayout(gridBagLayout);
 
-		HotkeyDialogView hotkeyDialogView = new HotkeyDialogView(frmSameAim);
+		hotkeyDialogView = new HotkeyDialogView(frmSameAim);
 
 		HotkeyButton btnMoveLeft = new HotkeyButton("Move Left", hotkeyDialogView);
 		GridBagConstraints gbc_btnMoveLeft = new GridBagConstraints();
@@ -71,5 +73,13 @@ public class HotkeyView extends JPanel {
 		for (HotkeyButton button : buttons) {
 			button.addActionListener(listener);
 		}
+	}
+
+	public void hideDialog() {
+		hotkeyDialogView.hideDialog();
+	}
+
+	public void addDialogCloseListener(WindowListener listener) {
+		hotkeyDialogView.addWindowListener(listener);
 	}
 }

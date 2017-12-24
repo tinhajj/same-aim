@@ -6,12 +6,16 @@ import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
 public class KeyGrabber implements NativeKeyListener {
-	public KeyGrabber() throws AWTException {
+	private Runnable task;
+
+	public KeyGrabber(Runnable task) throws AWTException {
+		this.task = task;
 	}
 
 	@Override
 	public void nativeKeyPressed(NativeKeyEvent e) {
 		e.getKeyCode();
+		task.run();
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 
 import com.rotato.aim.KeyGrabber;
+import com.rotato.gui.KeypressTaskFunction;
 import com.rotato.gui.model.Hotkey;
 import com.rotato.gui.view.HotkeyView;
 
@@ -36,8 +37,8 @@ public class HotkeyController {
 		this.view.addDialogCloseListener(new CloseDialogListener());
 	}
 
-	private Runnable updateHotkey() {
-		Runnable update = () -> {
+	private KeypressTaskFunction updateHotkey() {
+		KeypressTaskFunction update = (e) -> {
 			// update model
 			cleanDialog();
 		};

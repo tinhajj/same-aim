@@ -5,18 +5,20 @@ import java.awt.AWTException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
-import com.rotato.gui.KeypressTaskFunction;
+public class KeyAction implements NativeKeyListener {
+	private Runnable action;
+	private int keycode;
 
-public class KeyGrabber implements NativeKeyListener {
-	private KeypressTaskFunction task;
-
-	public KeyGrabber(KeypressTaskFunction task) throws AWTException {
-		this.task = task;
+	public KeyAction(Runnable action, int keycode) throws AWTException {
+		this.action = action;
+		this.keycode = keycode;
 	}
 
 	@Override
 	public void nativeKeyPressed(NativeKeyEvent e) {
-		task.run(e);
+		if (e.getKeyCode() == keycode) {
+			action.run();
+		}
 	}
 
 	@Override
@@ -25,5 +27,9 @@ public class KeyGrabber implements NativeKeyListener {
 
 	@Override
 	public void nativeKeyTyped(NativeKeyEvent e) {
+	}
+
+	public void setKeycode(int k) {
+		this.keycode = k;
 	}
 }

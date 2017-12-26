@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 public class HotkeyDialogView extends JDialog {
 	private JLabel lblNewLabel;
 	private JFrame owner;
+	private String message;
 
 	HotkeyDialogView(JFrame owner) {
 		super(owner, true);
@@ -36,9 +37,14 @@ public class HotkeyDialogView extends JDialog {
 	}
 
 	public void showDialog(String message) {
+		this.message = message;
 		setLocationRelativeTo(owner);
 		lblNewLabel.setText("Set a hotkey for: [" + message + "]");
 		setVisible(true);
+	}
+
+	public String getMessage() {
+		return message;
 	}
 
 }

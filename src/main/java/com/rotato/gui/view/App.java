@@ -12,7 +12,9 @@ import javax.swing.UIManager;
 
 import org.jnativehook.GlobalScreen;
 
+import com.rotato.gui.controller.CounterController;
 import com.rotato.gui.controller.HotkeyController;
+import com.rotato.gui.model.Counter;
 import com.rotato.gui.model.Hotkey;
 
 public class App {
@@ -30,7 +32,7 @@ public class App {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Throwable e) {
-			e.printStackTrace();
+			System.out.println("Couldn't set look and feel");
 		}
 		EventQueue.invokeLater(new Runnable() {
 			@Override
@@ -39,7 +41,8 @@ public class App {
 					App window = new App();
 					window.frmSameAim.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println("Something went wrong initializing gui");
+					System.exit(1);
 				}
 			}
 		});
@@ -69,15 +72,18 @@ public class App {
 		HotkeyView hotkeyView = new HotkeyView(frmSameAim);
 		Hotkey hotkeyModel = new Hotkey();
 
-		HotkeyController hotkeyController = new HotkeyController(hotkeyModel, hotkeyView);
+		CounterView counterView = new CounterView();
+		Counter counterModel = new Counter();
+
+		CounterController counterController = new CounterController(counterModel, counterView);
+		HotkeyController hotkeyController = new HotkeyController(hotkeyModel, hotkeyView, counterController);
 
 		GridBagLayout gridBagLayout = (GridBagLayout) hotkeyView.getLayout();
 		gridBagLayout.columnWidths = new int[] { 100, 100 };
 		gridBagLayout.rowHeights = new int[] { 50, 50, 50 };
-		frmSameAim.getContentPane().add(hotkeyView, BorderLayout.NORTH);
 
-		ConsoleView console = new ConsoleView();
-		frmSameAim.getContentPane().add(console, BorderLayout.SOUTH);
+		frmSameAim.getContentPane().add(hotkeyView, BorderLayout.NORTH);
+		frmSameAim.getContentPane().add(counterView, BorderLayout.SOUTH);
 	}
 
 }

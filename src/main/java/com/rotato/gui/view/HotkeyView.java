@@ -82,4 +82,8 @@ public class HotkeyView extends JPanel {
 	public void addDialogCloseListener(WindowListener listener) {
 		hotkeyDialogView.addWindowListener(listener);
 	}
+
+	public String getDialogText() {
+		return hotkeyDialogView.getMessage();
+	}
 }

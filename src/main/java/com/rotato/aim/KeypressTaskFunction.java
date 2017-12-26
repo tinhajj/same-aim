@@ -1,4 +1,4 @@
-package com.rotato.gui;
+package com.rotato.aim;
 
 import org.jnativehook.keyboard.NativeKeyEvent;
 

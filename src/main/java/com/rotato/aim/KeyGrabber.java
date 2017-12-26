@@ -5,8 +5,6 @@ import java.awt.AWTException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
-import com.rotato.gui.KeypressTaskFunction;
-
 public class KeyGrabber implements NativeKeyListener {
 	private KeypressTaskFunction task;
 

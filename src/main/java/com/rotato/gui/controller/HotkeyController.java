@@ -10,7 +10,7 @@ import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 
 import com.rotato.aim.KeyGrabber;
-import com.rotato.gui.KeypressTaskFunction;
+import com.rotato.aim.KeypressTaskFunction;
 import com.rotato.gui.model.Hotkey;
 import com.rotato.gui.view.HotkeyView;
 

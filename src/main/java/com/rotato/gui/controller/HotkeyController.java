@@ -14,6 +14,9 @@ import com.rotato.aim.KeyAction;
 import com.rotato.aim.KeyGrabber;
 import com.rotato.aim.KeypressTaskFunction;
 import com.rotato.aim.MouseTranslator;
+import com.rotato.aim.RampUpFunction;
+import com.rotato.aim.RampUpFunctions;
+import com.rotato.aim.RepeatingKeyAction;
 import com.rotato.gui.model.Hotkey;
 import com.rotato.gui.view.HotkeyView;
 
@@ -23,7 +26,8 @@ public class HotkeyController {
 	private KeyGrabber grabber;
 	private CounterController counterController;
 
-	public HotkeyController(Hotkey model, HotkeyView view, CounterController counterController) throws AWTException {
+	public HotkeyController(Hotkey model, HotkeyView view,
+			CounterController counterController) throws AWTException {
 		this.model = model;
 		this.view = view;
 		this.counterController = counterController;
@@ -34,7 +38,8 @@ public class HotkeyController {
 		try {
 			GlobalScreen.registerNativeHook();
 		} catch (NativeHookException ex) {
-			System.err.println("There was a problem registering the native hook.");
+			System.err.println(
+					"There was a problem registering the native hook.");
 			System.err.println(ex.getMessage());
 
 			System.exit(1);
@@ -48,8 +53,10 @@ public class HotkeyController {
 	// Setup model's hashmap. A not so great way of defining which buttons
 	// are related to a specific action.
 	private void initModel() throws AWTException {
-		this.model.setAction("Move Left", moveLeft(57619));
-		this.model.setAction("Move Down", moveDown(57624));
+		RampUpFunction rampFunc = new RampUpFunction(
+				RampUpFunctions.stepFunction(20));
+		this.model.setAction("Move Left", moveLeft(57619, rampFunc));
+		this.model.setAction("Move Down", moveDown(57624, rampFunc));
 		this.model.setAction("Reset Counter", resetCounter(14));
 	}
 
@@ -78,7 +85,8 @@ public class HotkeyController {
 		return new KeyAction(action, keyCode);
 	}
 
-	private KeyAction moveLeft(int keyCode) throws AWTException {
+	private RepeatingKeyAction moveLeft(int keyCode, RampUpFunction func)
+			throws AWTException {
 		Runnable action = () -> {
 			try {
 				MouseTranslator.translate(-1, 0);
@@ -87,10 +95,11 @@ public class HotkeyController {
 				System.out.println("Interrupted during move");
 			}
 		};
-		return new KeyAction(action, keyCode);
+		return new RepeatingKeyAction(action, keyCode, func);
 	}
 
-	private KeyAction moveDown(int keyCode) throws AWTException {
+	private KeyAction moveDown(int keyCode, RampUpFunction func)
+			throws AWTException {
 		Runnable action = () -> {
 			try {
 				MouseTranslator.translate(0, 1);
@@ -99,7 +108,7 @@ public class HotkeyController {
 				System.out.println("Interrupted during move");
 			}
 		};
-		return new KeyAction(action, keyCode);
+		return new RepeatingKeyAction(action, keyCode, func);
 	}
 
 	private void cleanDialog() {

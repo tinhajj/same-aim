@@ -6,8 +6,8 @@ import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
 public class KeyAction implements NativeKeyListener {
-	private Runnable action;
-	private int keycode;
+	protected Runnable action;
+	protected int keycode;
 
 	public KeyAction(Runnable action, int keycode) throws AWTException {
 		this.action = action;

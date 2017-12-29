@@ -13,7 +13,7 @@ import org.jnativehook.NativeHookException;
 import com.rotato.aim.KeyAction;
 import com.rotato.aim.KeyGrabber;
 import com.rotato.aim.KeyPressTask;
-import com.rotato.aim.MouseTranslator;
+import com.rotato.aim.Mouse;
 import com.rotato.aim.RampFunction;
 import com.rotato.aim.RampFactory;
 import com.rotato.aim.RepeatingKeyAction;
@@ -89,7 +89,7 @@ public class HotkeyController {
 			throws AWTException {
 		Runnable action = () -> {
 			try {
-				MouseTranslator.translate(-1, 0);
+				Mouse.translate(-1, 0);
 				counterController.incrementLeftCounter(1);
 			} catch (InterruptedException e) {
 				System.out.println("Interrupted during move");
@@ -102,7 +102,7 @@ public class HotkeyController {
 			throws AWTException {
 		Runnable action = () -> {
 			try {
-				MouseTranslator.translate(0, 1);
+				Mouse.translate(0, 1);
 				counterController.incrementDownCounter(1);
 			} catch (InterruptedException e) {
 				System.out.println("Interrupted during move");

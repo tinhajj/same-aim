@@ -4,7 +4,7 @@ import java.awt.AWTException;
 import java.awt.MouseInfo;
 import java.awt.Robot;
 
-public class MouseTranslator {
+public class Mouse {
 	static Robot robot;
 
 	static {

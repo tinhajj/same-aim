@@ -7,8 +7,7 @@ import org.jnativehook.keyboard.NativeKeyEvent;
 public class RepeatingKeyAction extends KeyAction {
 	RampFunction rampUp;
 
-	public RepeatingKeyAction(Runnable action, int keycode, RampFunction ramp)
-			throws AWTException {
+	public RepeatingKeyAction(Runnable action, int keycode, RampFunction ramp) throws AWTException {
 		super(action, keycode);
 
 		rampUp = ramp;

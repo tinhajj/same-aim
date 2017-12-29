@@ -22,4 +22,8 @@ public class RampFunction {
 	public void reset() {
 		currentX = 1;
 	}
+
+	public int getX() {
+		return currentX;
+	}
 }

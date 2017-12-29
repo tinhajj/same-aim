@@ -14,8 +14,8 @@ import com.rotato.aim.KeyAction;
 import com.rotato.aim.KeyGrabber;
 import com.rotato.aim.KeyPressTask;
 import com.rotato.aim.Mouse;
-import com.rotato.aim.RampFunction;
 import com.rotato.aim.RampFactory;
+import com.rotato.aim.RampFunction;
 import com.rotato.aim.RepeatingKeyAction;
 import com.rotato.gui.model.Hotkey;
 import com.rotato.gui.view.HotkeyView;
@@ -26,8 +26,7 @@ public class HotkeyController {
 	private KeyGrabber grabber;
 	private CounterController counterController;
 
-	public HotkeyController(Hotkey model, HotkeyView view,
-			CounterController counterController) throws AWTException {
+	public HotkeyController(Hotkey model, HotkeyView view, CounterController counterController) throws AWTException {
 		this.model = model;
 		this.view = view;
 		this.counterController = counterController;
@@ -38,8 +37,7 @@ public class HotkeyController {
 		try {
 			GlobalScreen.registerNativeHook();
 		} catch (NativeHookException ex) {
-			System.err.println(
-					"There was a problem registering the native hook.");
+			System.err.println("There was a problem registering the native hook.");
 			System.err.println(ex.getMessage());
 
 			System.exit(1);
@@ -53,8 +51,7 @@ public class HotkeyController {
 	// Setup model's hashmap. A not so great way of defining which buttons
 	// are related to a specific action.
 	private void initModel() throws AWTException {
-		RampFunction rampFunc = new RampFunction(
-				RampFactory.stepFunction(20));
+		RampFunction rampFunc = new RampFunction(RampFactory.linearFunction(20));
 		this.model.setAction("Move Left", moveLeft(57619, rampFunc));
 		this.model.setAction("Move Down", moveDown(57624, rampFunc));
 		this.model.setAction("Reset Counter", resetCounter(14));
@@ -85,8 +82,7 @@ public class HotkeyController {
 		return new KeyAction(action, keyCode);
 	}
 
-	private RepeatingKeyAction moveLeft(int keyCode, RampFunction func)
-			throws AWTException {
+	private RepeatingKeyAction moveLeft(int keyCode, RampFunction func) throws AWTException {
 		Runnable action = () -> {
 			try {
 				Mouse.translate(-1, 0);
@@ -98,8 +94,7 @@ public class HotkeyController {
 		return new RepeatingKeyAction(action, keyCode, func);
 	}
 
-	private KeyAction moveDown(int keyCode, RampFunction func)
-			throws AWTException {
+	private KeyAction moveDown(int keyCode, RampFunction func) throws AWTException {
 		Runnable action = () -> {
 			try {
 				Mouse.translate(0, 1);

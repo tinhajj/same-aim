@@ -6,9 +6,9 @@ import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
 public class KeyGrabber implements NativeKeyListener {
-	private KeypressTaskFunction task;
+	private KeyPressTask task;
 
-	public KeyGrabber(KeypressTaskFunction task) throws AWTException {
+	public KeyGrabber(KeyPressTask task) throws AWTException {
 		this.task = task;
 	}
 

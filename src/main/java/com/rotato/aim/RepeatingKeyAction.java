@@ -5,9 +5,9 @@ import java.awt.AWTException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 
 public class RepeatingKeyAction extends KeyAction {
-	RampUpFunction rampUp;
+	RampFunction rampUp;
 
-	public RepeatingKeyAction(Runnable action, int keycode, RampUpFunction ramp)
+	public RepeatingKeyAction(Runnable action, int keycode, RampFunction ramp)
 			throws AWTException {
 		super(action, keycode);
 
@@ -17,19 +17,19 @@ public class RepeatingKeyAction extends KeyAction {
 	@Override
 	public void nativeKeyPressed(NativeKeyEvent e) {
 		if (e.getKeyCode() == keycode) {
-			int speed = rampUp.getSpeed();
+			int speed = rampUp.current();
 			for (int x = 0; x < speed; x++) {
 				action.run();
 			}
 
-			rampUp.faster();
+			rampUp.increase();
 		}
 	}
 
 	@Override
 	public void nativeKeyReleased(NativeKeyEvent e) {
 		if (e.getKeyCode() == keycode) {
-			rampUp.resetSpeed();
+			rampUp.reset();
 		}
 	}
 

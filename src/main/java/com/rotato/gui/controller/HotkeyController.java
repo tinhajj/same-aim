@@ -12,10 +12,10 @@ import org.jnativehook.NativeHookException;
 
 import com.rotato.aim.KeyAction;
 import com.rotato.aim.KeyGrabber;
-import com.rotato.aim.KeypressTaskFunction;
+import com.rotato.aim.KeyPressTask;
 import com.rotato.aim.MouseTranslator;
-import com.rotato.aim.RampUpFunction;
-import com.rotato.aim.RampUpFunctions;
+import com.rotato.aim.RampFunction;
+import com.rotato.aim.RampFactory;
 import com.rotato.aim.RepeatingKeyAction;
 import com.rotato.gui.model.Hotkey;
 import com.rotato.gui.view.HotkeyView;
@@ -53,8 +53,8 @@ public class HotkeyController {
 	// Setup model's hashmap. A not so great way of defining which buttons
 	// are related to a specific action.
 	private void initModel() throws AWTException {
-		RampUpFunction rampFunc = new RampUpFunction(
-				RampUpFunctions.stepFunction(20));
+		RampFunction rampFunc = new RampFunction(
+				RampFactory.stepFunction(20));
 		this.model.setAction("Move Left", moveLeft(57619, rampFunc));
 		this.model.setAction("Move Down", moveDown(57624, rampFunc));
 		this.model.setAction("Reset Counter", resetCounter(14));
@@ -67,8 +67,8 @@ public class HotkeyController {
 		}
 	}
 
-	private KeypressTaskFunction updateHotkey() {
-		KeypressTaskFunction update = (e) -> {
+	private KeyPressTask updateHotkey() {
+		KeyPressTask update = (e) -> {
 			String key = this.view.getDialogText();
 			KeyAction action = this.model.getAction(key);
 			action.setKeycode(e.getKeyCode());
@@ -85,7 +85,7 @@ public class HotkeyController {
 		return new KeyAction(action, keyCode);
 	}
 
-	private RepeatingKeyAction moveLeft(int keyCode, RampUpFunction func)
+	private RepeatingKeyAction moveLeft(int keyCode, RampFunction func)
 			throws AWTException {
 		Runnable action = () -> {
 			try {
@@ -98,7 +98,7 @@ public class HotkeyController {
 		return new RepeatingKeyAction(action, keyCode, func);
 	}
 
-	private KeyAction moveDown(int keyCode, RampUpFunction func)
+	private KeyAction moveDown(int keyCode, RampFunction func)
 			throws AWTException {
 		Runnable action = () -> {
 			try {

@@ -6,17 +6,19 @@ import java.awt.Robot;
 
 public class Mouse {
 	static Robot robot;
+	static XY lastXY;
 
 	static {
 		try {
 			robot = new Robot();
+			lastXY = currentPos();
 		} catch (AWTException e) {
 			System.out.println("Could not initialize robot");
 			System.exit(1);
 		}
 	}
 
-	public static XY currentPos() {
+	private static XY currentPos() {
 		java.awt.Point pointer = MouseInfo.getPointerInfo().getLocation();
 		int x = (int) pointer.getX();
 		int y = (int) pointer.getY();
@@ -29,6 +31,13 @@ public class Mouse {
 		int xPos = curPos.getX();
 		int yPos = curPos.getY();
 
+		if (lastXY.getX() == xPos) {
+			System.out.println("didn't move anywhere on x");
+		}
+
+		lastXY = curPos;
+
 		robot.mouseMove(xPos + x, yPos + y);
+		robot.delay(5);
 	}
 }

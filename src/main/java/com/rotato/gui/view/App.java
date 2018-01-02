@@ -25,7 +25,8 @@ public class App {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+		Logger logger = Logger
+				.getLogger(GlobalScreen.class.getPackage().getName());
 		logger.setLevel(Level.OFF);
 		logger.setUseParentHandlers(false);
 
@@ -75,12 +76,14 @@ public class App {
 		CounterView counterView = new CounterView();
 		Counter counterModel = new Counter();
 
-		CounterController counterController = new CounterController(counterModel, counterView);
-		HotkeyController hotkeyController = new HotkeyController(hotkeyModel, hotkeyView, counterController);
+		CounterController counterController = new CounterController(
+				counterModel, counterView);
+		HotkeyController hotkeyController = new HotkeyController(hotkeyModel,
+				hotkeyView, counterController);
 
 		GridBagLayout gridBagLayout = (GridBagLayout) hotkeyView.getLayout();
-		gridBagLayout.columnWidths = new int[] { 100, 100 };
-		gridBagLayout.rowHeights = new int[] { 50, 50, 50 };
+		gridBagLayout.columnWidths = new int[]{100, 100};
+		gridBagLayout.rowHeights = new int[]{50, 50, 50};
 
 		frmSameAim.getContentPane().add(hotkeyView, BorderLayout.NORTH);
 		frmSameAim.getContentPane().add(counterView, BorderLayout.SOUTH);

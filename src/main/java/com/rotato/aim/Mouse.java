@@ -16,7 +16,6 @@ public class Mouse {
 			robot = new Robot();
 			lastXY = currentPos();
 			robot.setAutoWaitForIdle(true);
-			robot.setAutoDelay(1);
 		} catch (AWTException e) {
 			System.out.println("Could not initialize robot");
 			System.exit(1);
@@ -36,17 +35,12 @@ public class Mouse {
 		int xPos = curPos.getX();
 		int yPos = curPos.getY();
 
-		if (lastXY.getX() == xPos) {
-			System.out.println("didn't move anywhere on x");
-		}
-
 		lastXY = curPos;
 
 		robot.mouseMove(xPos + x, yPos + y);
 	}
 
 	public static void hookTranslate(int x, int y) {
-		GlobalScreen.postNativeEvent(new NativeMouseEvent(
-				NativeMouseEvent.NATIVE_MOUSE_MOVED, 1, 1, 1, 1));
+		GlobalScreen.postNativeEvent(new NativeMouseEvent(NativeMouseEvent.NATIVE_MOUSE_MOVED, 1, 1, 1, 1));
 	}
 }

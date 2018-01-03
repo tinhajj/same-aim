@@ -10,7 +10,6 @@ public class Mouse {
 	static {
 		try {
 			robot = new Robot();
-			lastXY = currentPos();
 			robot.setAutoWaitForIdle(true);
 		} catch (AWTException e) {
 			System.out.println("Could not initialize robot");

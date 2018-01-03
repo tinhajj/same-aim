@@ -4,9 +4,6 @@ import java.awt.AWTException;
 import java.awt.MouseInfo;
 import java.awt.Robot;
 
-import org.jnativehook.GlobalScreen;
-import org.jnativehook.mouse.NativeMouseEvent;
-
 public class Mouse {
 	static Robot robot;
 	static XY lastXY;
@@ -38,9 +35,5 @@ public class Mouse {
 		lastXY = curPos;
 
 		robot.mouseMove(xPos + x, yPos + y);
-	}
-
-	public static void hookTranslate(int x, int y) {
-		GlobalScreen.postNativeEvent(new NativeMouseEvent(NativeMouseEvent.NATIVE_MOUSE_MOVED, 1, 1, 1, 1));
 	}
 }

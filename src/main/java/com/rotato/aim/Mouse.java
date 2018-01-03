@@ -6,7 +6,6 @@ import java.awt.Robot;
 
 public class Mouse {
 	static Robot robot;
-	static XY lastXY;
 
 	static {
 		try {
@@ -31,8 +30,6 @@ public class Mouse {
 		XY curPos = currentPos();
 		int xPos = curPos.getX();
 		int yPos = curPos.getY();
-
-		lastXY = curPos;
 
 		robot.mouseMove(xPos + x, yPos + y);
 	}

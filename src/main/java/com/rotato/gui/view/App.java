@@ -7,7 +7,9 @@ import java.awt.GridBagLayout;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 import org.jnativehook.GlobalScreen;
@@ -25,8 +27,7 @@ public class App {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		Logger logger = Logger
-				.getLogger(GlobalScreen.class.getPackage().getName());
+		Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
 		logger.setLevel(Level.OFF);
 		logger.setUseParentHandlers(false);
 
@@ -70,23 +71,29 @@ public class App {
 		frmSameAim.setLocationRelativeTo(null);
 		frmSameAim.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		JPanel container = new JPanel();
+		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
+
 		HotkeyView hotkeyView = new HotkeyView(frmSameAim);
 		Hotkey hotkeyModel = new Hotkey();
 
 		CounterView counterView = new CounterView();
 		Counter counterModel = new Counter();
 
-		CounterController counterController = new CounterController(
-				counterModel, counterView);
-		HotkeyController hotkeyController = new HotkeyController(hotkeyModel,
-				hotkeyView, counterController);
+		CounterController counterController = new CounterController(counterModel, counterView);
+		HotkeyController hotkeyController = new HotkeyController(hotkeyModel, hotkeyView, counterController);
 
 		GridBagLayout gridBagLayout = (GridBagLayout) hotkeyView.getLayout();
-		gridBagLayout.columnWidths = new int[]{100, 100};
-		gridBagLayout.rowHeights = new int[]{50, 50, 50};
+		gridBagLayout.columnWidths = new int[] { 100, 100 };
+		gridBagLayout.rowHeights = new int[] { 50, 50, 50 };
 
-		frmSameAim.getContentPane().add(hotkeyView, BorderLayout.NORTH);
-		frmSameAim.getContentPane().add(counterView, BorderLayout.SOUTH);
+		frmSameAim.getContentPane().add(container, BorderLayout.CENTER);
+
+		container.add(hotkeyView);
+		container.add(counterView);
+
+		// frmSameAim.getContentPane().add(hotkeyView, BorderLayout.NORTH);
+		// frmSameAim.getContentPane().add(counterView, BorderLayout.SOUTH);
 	}
 
 }

@@ -7,7 +7,7 @@ import java.awt.Robot;
 public class Mouse {
 	static Robot robot;
 	static int multiplier = 1;
-	static int max = 1;
+	static int max = 10;
 
 	static {
 		try {
@@ -55,7 +55,9 @@ public class Mouse {
 	}
 
 	public static void increaseMultiplier() {
-		multiplier++;
+		if (multiplier + 1 < max) {
+			multiplier++;
+		}
 	}
 
 	public static void resetMultiplier() {

@@ -50,6 +50,7 @@ public class MouseView extends JPanel {
 		speed.setPaintTicks(true);
 		speed.setFocusable(false);
 		speed.setMinimum(1);
+		speed.setValue(10);
 		speed.setBorder(new EmptyBorder(10, 0, 0, 0));
 		add(speed);
 		speed.addChangeListener(new LabelUpdate(speedLabel, "px", updateMouseMax));

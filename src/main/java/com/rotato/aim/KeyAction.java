@@ -23,7 +23,6 @@ public class KeyAction implements NativeKeyListener {
 
 	@Override
 	public void nativeKeyPressed(NativeKeyEvent e) {
-		System.out.println(e.getKeyCode());
 		if (e.getKeyCode() == keycode) {
 			pressAction.run();
 		}

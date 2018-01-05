@@ -14,9 +14,6 @@ import com.rotato.aim.KeyAction;
 import com.rotato.aim.KeyGrabber;
 import com.rotato.aim.KeyPressTask;
 import com.rotato.aim.Mouse;
-import com.rotato.aim.RampFactory;
-import com.rotato.aim.RampFunction;
-import com.rotato.aim.RepeatingKeyAction;
 import com.rotato.gui.model.Hotkey;
 import com.rotato.gui.view.HotkeyView;
 
@@ -33,6 +30,7 @@ public class HotkeyController {
 
 		initModel();
 		initListeners();
+		Mouse.setMaxMultiplier(10);
 
 		try {
 			GlobalScreen.registerNativeHook();
@@ -51,9 +49,8 @@ public class HotkeyController {
 	// Setup model's hashmap. A not so great way of defining which buttons
 	// are related to a specific action.
 	private void initModel() throws AWTException {
-		RampFunction rampFunc = new RampFunction(RampFactory.linearFunction(20));
-		this.model.setAction("Move Left", moveLeft(57619, rampFunc));
-		this.model.setAction("Move Down", moveDown(57624, rampFunc));
+		this.model.setAction("Move Left", moveLeft(57419));
+		this.model.setAction("Move Down", moveDown(57424));
 		this.model.setAction("Reset Counter", resetCounter(14));
 	}
 
@@ -82,28 +79,40 @@ public class HotkeyController {
 		return new KeyAction(action, keyCode);
 	}
 
-	private RepeatingKeyAction moveLeft(int keyCode, RampFunction func) throws AWTException {
+	private KeyAction moveLeft(int keyCode) throws AWTException {
 		Runnable action = () -> {
 			try {
-				Mouse.translate(-1, 0);
-				counterController.incrementLeftCounter(1);
+				int delta = Mouse.translateX(-1);
+				Mouse.increaseMultiplier();
+
+				counterController.incrementLeftCounter(delta);
 			} catch (InterruptedException e) {
 				System.out.println("Interrupted during move");
 			}
 		};
-		return new RepeatingKeyAction(action, keyCode, func);
+		return new KeyAction(action, resetAction(), keyCode);
 	}
 
-	private RepeatingKeyAction moveDown(int keyCode, RampFunction func) throws AWTException {
+	private KeyAction moveDown(int keyCode) throws AWTException {
 		Runnable action = () -> {
 			try {
-				Mouse.translate(0, 1);
-				counterController.incrementDownCounter(1);
+				int delta = Mouse.translateY(1);
+				Mouse.increaseMultiplier();
+
+				counterController.incrementDownCounter(delta);
 			} catch (InterruptedException e) {
 				System.out.println("Interrupted during move");
 			}
 		};
-		return new RepeatingKeyAction(action, keyCode, func);
+		return new KeyAction(action, resetAction(), keyCode);
+	}
+
+	private Runnable resetAction() {
+		Runnable action = () -> {
+			Mouse.resetMultiplier();
+		};
+
+		return action;
 	}
 
 	private void cleanDialog() {

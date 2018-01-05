@@ -6,23 +6,36 @@ import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
 public class KeyAction implements NativeKeyListener {
-	protected Runnable action;
+	protected Runnable pressAction;
+	protected Runnable releaseAction;
 	protected int keycode;
 
-	public KeyAction(Runnable action, int keycode) throws AWTException {
-		this.action = action;
+	public KeyAction(Runnable pressAction, Runnable releaseAction, int keycode) throws AWTException {
+		this.pressAction = pressAction;
+		this.releaseAction = releaseAction;
+		this.keycode = keycode;
+	}
+
+	public KeyAction(Runnable pressAction, int keycode) throws AWTException {
+		this.pressAction = pressAction;
 		this.keycode = keycode;
 	}
 
 	@Override
 	public void nativeKeyPressed(NativeKeyEvent e) {
+		System.out.println(e.getKeyCode());
 		if (e.getKeyCode() == keycode) {
-			action.run();
+			pressAction.run();
 		}
 	}
 
 	@Override
 	public void nativeKeyReleased(NativeKeyEvent e) {
+		if (releaseAction != null) {
+			if (e.getKeyCode() == keycode) {
+				releaseAction.run();
+			}
+		}
 	}
 
 	@Override

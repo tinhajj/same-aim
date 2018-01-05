@@ -1,17 +1,18 @@
 package com.rotato.gui.view;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.Component;
+import java.awt.ComponentOrientation;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class HotkeyView extends JPanel {
-	private JFrame frame;
 	private ArrayList<HotkeyButton> buttons;
 	private HotkeyDialogView hotkeyDialogView;
 
@@ -21,52 +22,32 @@ public class HotkeyView extends JPanel {
 	 * @param frmSameAim
 	 */
 	public HotkeyView(JFrame frmSameAim) {
+		setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		setBorder(new EmptyBorder(25, 10, 25, 5));
 		buttons = new ArrayList<HotkeyButton>();
 
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 100, 100 };
-		gridBagLayout.rowHeights = new int[] { 50, 50 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0 };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0 };
-		setLayout(gridBagLayout);
-
 		hotkeyDialogView = new HotkeyDialogView(frmSameAim);
+		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
+		Dimension buttonSize = new Dimension(105, 50);
 
 		HotkeyButton btnMoveLeft = new HotkeyButton("Move Left", hotkeyDialogView);
-		GridBagConstraints gbc_btnMoveLeft = new GridBagConstraints();
-		gbc_btnMoveLeft.fill = GridBagConstraints.BOTH;
-		gbc_btnMoveLeft.insets = new Insets(0, 0, 5, 5);
-		gbc_btnMoveLeft.gridx = 0;
-		gbc_btnMoveLeft.gridy = 0;
-		add(btnMoveLeft, gbc_btnMoveLeft);
+		btnMoveLeft.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnMoveLeft.setPreferredSize(buttonSize);
+		add(btnMoveLeft);
 		buttons.add(btnMoveLeft);
 
-		HotkeyButton btnResetCounter = new HotkeyButton("Reset Counter", hotkeyDialogView);
-		GridBagConstraints gbc_btnResetCounter = new GridBagConstraints();
-		gbc_btnResetCounter.fill = GridBagConstraints.BOTH;
-		gbc_btnResetCounter.insets = new Insets(0, 0, 5, 0);
-		gbc_btnResetCounter.gridx = 1;
-		gbc_btnResetCounter.gridy = 0;
-		add(btnResetCounter, gbc_btnResetCounter);
-		buttons.add(btnResetCounter);
-
-		HotkeyButton btnPrintCounter = new HotkeyButton("Print Counter", hotkeyDialogView);
-		GridBagConstraints gbc_btnPrintCounter = new GridBagConstraints();
-		gbc_btnPrintCounter.fill = GridBagConstraints.BOTH;
-		gbc_btnPrintCounter.insets = new Insets(0, 0, 5, 0);
-		gbc_btnPrintCounter.gridx = 1;
-		gbc_btnPrintCounter.gridy = 1;
-		add(btnPrintCounter, gbc_btnPrintCounter);
-		buttons.add(btnPrintCounter);
-
 		HotkeyButton btnMoveDown = new HotkeyButton("Move Down", hotkeyDialogView);
-		GridBagConstraints gbc_btnMoveDown = new GridBagConstraints();
-		gbc_btnMoveDown.fill = GridBagConstraints.BOTH;
-		gbc_btnMoveDown.insets = new Insets(0, 0, 5, 5);
-		gbc_btnMoveDown.gridx = 0;
-		gbc_btnMoveDown.gridy = 1;
-		add(btnMoveDown, gbc_btnMoveDown);
+		btnMoveDown.setPreferredSize(buttonSize);
+		btnMoveDown.setAlignmentX(Component.CENTER_ALIGNMENT);
+		add(btnMoveDown);
 		buttons.add(btnMoveDown);
+
+		HotkeyButton btnResetCounter = new HotkeyButton("Reset Counter", hotkeyDialogView);
+		btnResetCounter.setPreferredSize(buttonSize);
+		btnResetCounter.setAlignmentX(Component.CENTER_ALIGNMENT);
+		add(btnResetCounter);
+		buttons.add(btnResetCounter);
 	}
 
 	public void addHotkeyListener(ActionListener listener) {

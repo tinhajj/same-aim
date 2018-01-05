@@ -3,7 +3,6 @@ package com.rotato.gui.view;
 import java.awt.AWTException;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.GridBagLayout;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,6 +43,7 @@ public class App {
 					window.frmSameAim.setVisible(true);
 				} catch (Exception e) {
 					System.out.println("Something went wrong initializing gui");
+					System.out.println(e);
 					System.exit(1);
 				}
 			}
@@ -67,7 +67,7 @@ public class App {
 	private void initialize() throws AWTException {
 		frmSameAim = new JFrame();
 		frmSameAim.setTitle("Same Aim");
-		frmSameAim.setBounds(100, 100, 311, 382);
+		frmSameAim.setBounds(100, 100, 380, 500);
 		frmSameAim.setLocationRelativeTo(null);
 		frmSameAim.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -80,20 +80,16 @@ public class App {
 		CounterView counterView = new CounterView();
 		Counter counterModel = new Counter();
 
+		MouseView mouseView = new MouseView();
+
 		CounterController counterController = new CounterController(counterModel, counterView);
 		HotkeyController hotkeyController = new HotkeyController(hotkeyModel, hotkeyView, counterController);
-
-		GridBagLayout gridBagLayout = (GridBagLayout) hotkeyView.getLayout();
-		gridBagLayout.columnWidths = new int[] { 100, 100 };
-		gridBagLayout.rowHeights = new int[] { 50, 50, 50 };
 
 		frmSameAim.getContentPane().add(container, BorderLayout.CENTER);
 
 		container.add(hotkeyView);
 		container.add(counterView);
-
-		// frmSameAim.getContentPane().add(hotkeyView, BorderLayout.NORTH);
-		// frmSameAim.getContentPane().add(counterView, BorderLayout.SOUTH);
+		container.add(mouseView);
 	}
 
 }

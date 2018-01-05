@@ -7,12 +7,14 @@ import java.awt.Insets;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class CounterView extends JPanel {
 	private JLabel lblLeftCounter;
 	private JLabel lblDownCounter;
 
 	public CounterView() {
+		setBorder(new EmptyBorder(25, 10, 25, 10));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 100, 100 };
 		gridBagLayout.rowHeights = new int[] { 50, 50 };

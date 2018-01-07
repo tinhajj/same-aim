@@ -43,6 +43,13 @@ public class HotkeyView extends JPanel {
 		add(btnMoveDown);
 		buttons.add(btnMoveDown);
 
+		HotkeyButton btnMoveReverse = new HotkeyButton("Reverse", (HotkeyDialogView) null);
+		btnMoveReverse.setToolTipText(
+				"This moves in the opposite direction of your last movement, and decrements the counter");
+		btnMoveReverse.setPreferredSize(new Dimension(105, 50));
+		btnMoveReverse.setAlignmentX(0.5f);
+		add(btnMoveReverse);
+
 		HotkeyButton btnResetCounter = new HotkeyButton("Reset Counter", hotkeyDialogView);
 		btnResetCounter.setPreferredSize(buttonSize);
 		btnResetCounter.setAlignmentX(Component.CENTER_ALIGNMENT);

@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Collection;
 
 import org.jnativehook.GlobalScreen;
@@ -22,6 +24,12 @@ public class HotkeyController {
 	private HotkeyView view;
 	private KeyGrabber grabber;
 	private CounterController counterController;
+
+	// This is a little brittle, but should be good enough.
+	// A functional interface might make more sense here for integrity.
+	private Method previousTranslate;
+	private Method previousIncrement;
+	private int previousDirection;
 
 	public HotkeyController(Hotkey model, HotkeyView view, CounterController counterController) throws AWTException {
 		this.model = model;
@@ -51,7 +59,8 @@ public class HotkeyController {
 	private void initModel() throws AWTException {
 		this.model.setAction("Move Left", moveLeft(57419));
 		this.model.setAction("Move Down", moveDown(57424));
-		this.model.setAction("Reset Counter", resetCounter(14));
+		this.model.setAction("Reset Counter", resetCounter(3667));
+		this.model.setAction("Move Reverse", moveReverse(14));
 	}
 
 	private void initListeners() {
@@ -86,7 +95,11 @@ public class HotkeyController {
 				Mouse.increaseMultiplier();
 
 				counterController.incrementLeftCounter(delta);
-			} catch (InterruptedException e) {
+
+				this.previousTranslate = Mouse.class.getMethod("translateX", int.class);
+				this.previousIncrement = CounterController.class.getMethod("incrementLeftCounter", int.class);
+				this.previousDirection = -1;
+			} catch (InterruptedException | NoSuchMethodException | SecurityException e) {
 				System.out.println("Interrupted during move");
 			}
 		};
@@ -100,7 +113,30 @@ public class HotkeyController {
 				Mouse.increaseMultiplier();
 
 				counterController.incrementDownCounter(delta);
-			} catch (InterruptedException e) {
+
+				this.previousTranslate = Mouse.class.getMethod("translateY", int.class);
+				this.previousIncrement = CounterController.class.getMethod("incrementDownCounter", int.class);
+				this.previousDirection = 1;
+			} catch (InterruptedException | NoSuchMethodException | SecurityException e) {
+				System.out.println("Interrupted during move");
+			}
+		};
+		return new KeyAction(action, resetAction(), keyCode);
+	}
+
+	private KeyAction moveReverse(int keyCode) throws AWTException {
+		Runnable action = () -> {
+			try {
+				if (this.previousIncrement == null | this.previousTranslate == null) {
+					return;
+				}
+
+				int delta = (int) previousTranslate.invoke(Mouse.class, this.previousDirection * -1);
+				Mouse.increaseMultiplier();
+
+				this.previousIncrement.invoke(counterController, delta * -1);
+			} catch (SecurityException | IllegalAccessException | IllegalArgumentException
+					| InvocationTargetException e) {
 				System.out.println("Interrupted during move");
 			}
 		};

@@ -23,7 +23,7 @@ public class CounterView extends JPanel {
 	private JLabel lblDownCounter;
 
 	public CounterView() {
-		setBorder(new EmptyBorder(25, 10, 25, 10));
+		setBorder(new EmptyBorder(5, 5, 5, 5));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 100 };
 		gridBagLayout.rowHeights = new int[] { 50, 50 };

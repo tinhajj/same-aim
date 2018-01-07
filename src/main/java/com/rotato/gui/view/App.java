@@ -3,6 +3,7 @@ package com.rotato.gui.view;
 import java.awt.AWTException;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridBagLayout;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -10,6 +11,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 
 import org.jnativehook.GlobalScreen;
 
@@ -67,7 +69,7 @@ public class App {
 	private void initialize() throws AWTException {
 		frmSameAim = new JFrame();
 		frmSameAim.setTitle("Same Aim");
-		frmSameAim.setBounds(100, 100, 380, 500);
+		frmSameAim.setBounds(100, 100, 275, 500);
 		frmSameAim.setLocationRelativeTo(null);
 		frmSameAim.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -75,12 +77,18 @@ public class App {
 		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 
 		HotkeyView hotkeyView = new HotkeyView(frmSameAim);
+		hotkeyView.setBorder(null);
 		Hotkey hotkeyModel = new Hotkey();
 
 		CounterView counterView = new CounterView();
+		GridBagLayout gridBagLayout = (GridBagLayout) counterView.getLayout();
+		gridBagLayout.columnWidths = new int[] { 50 };
+		gridBagLayout.rowHeights = new int[] { 10, 10 };
+		counterView.setBorder(null);
 		Counter counterModel = new Counter();
 
 		MouseView mouseView = new MouseView();
+		mouseView.setBorder(new EmptyBorder(0, 5, 0, 5));
 
 		CounterController counterController = new CounterController(counterModel, counterView);
 		HotkeyController hotkeyController = new HotkeyController(hotkeyModel, hotkeyView, counterController);

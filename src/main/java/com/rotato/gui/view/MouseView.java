@@ -16,7 +16,7 @@ import com.rotato.aim.Mouse;
 public class MouseView extends JPanel {
 
 	public MouseView() {
-		setBorder(new EmptyBorder(25, 10, 25, 10));
+		setBorder(new EmptyBorder(25, 10, 25, 5));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		Consumer<Integer> updateMouseDelay = (x) -> Mouse.setDelay(x);
@@ -39,8 +39,7 @@ public class MouseView extends JPanel {
 		delay.setValue(1);
 		delay.setBorder(new EmptyBorder(10, 0, 10, 0));
 		add(delay);
-		delay.addChangeListener(
-				new LabelUpdate(delayLabel, "ms", updateMouseDelay));
+		delay.addChangeListener(new LabelUpdate(delayLabel, "ms", updateMouseDelay));
 
 		JLabel speedLabel = new JLabel("Max Mouse Movement Speed");
 		speedLabel.setToolTipText("Controls the maximum speed of the mouse");
@@ -57,8 +56,7 @@ public class MouseView extends JPanel {
 		speed.setValue(10);
 		speed.setBorder(new EmptyBorder(10, 0, 0, 0));
 		add(speed);
-		speed.addChangeListener(
-				new LabelUpdate(speedLabel, "px", updateMouseMax));
+		speed.addChangeListener(new LabelUpdate(speedLabel, "px", updateMouseMax));
 	}
 }
 

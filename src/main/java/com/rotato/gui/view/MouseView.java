@@ -43,6 +43,7 @@ public class MouseView extends JPanel {
 				new LabelUpdate(delayLabel, "ms", updateMouseDelay));
 
 		JLabel speedLabel = new JLabel("Max Mouse Movement Speed");
+		speedLabel.setToolTipText("Controls the maximum speed of the mouse");
 		speedLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		speedLabel.setAlignmentX(0.5f);
 		add(speedLabel);

@@ -4,6 +4,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,10 +18,10 @@ public class CounterView extends JPanel {
 	public CounterView() {
 		setBorder(new EmptyBorder(25, 10, 25, 10));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 100, 100 };
-		gridBagLayout.rowHeights = new int[] { 50, 50 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0 };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0 };
+		gridBagLayout.columnWidths = new int[]{100, 100};
+		gridBagLayout.rowHeights = new int[]{50, 50};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0};
 		setLayout(gridBagLayout);
 
 		JLabel lblLeft = new JLabel("Left");
@@ -52,10 +54,24 @@ public class CounterView extends JPanel {
 		gbc_lblDownCounterLabel.gridx = 1;
 		gbc_lblDownCounterLabel.gridy = 1;
 		add(lblDownCounter, gbc_lblDownCounterLabel);
+
+		lblLeftCounter.addMouseListener(new ClipboardCopy(lblLeftCounter));
 	}
 
 	public void setCounters(int left, int down) {
 		lblLeftCounter.setText(Integer.toString(left));
 		lblDownCounter.setText(Integer.toString(down));
+	}
+}
+
+class ClipboardCopy extends MouseAdapter {
+	private JLabel label;
+	public ClipboardCopy(JLabel label) {
+		this.label = label;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		System.out.println(label.getText());
 	}
 }

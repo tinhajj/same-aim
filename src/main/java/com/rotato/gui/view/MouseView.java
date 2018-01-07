@@ -23,6 +23,8 @@ public class MouseView extends JPanel {
 		Consumer<Integer> updateMouseMax = (x) -> Mouse.setMaxMultiplier(x);
 
 		JLabel delayLabel = new JLabel("Mouse Movement Delay");
+		delayLabel.setToolTipText(
+				"Increase this setting if you are noticing you get different values for 360s in the same game");
 		delayLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		delayLabel.setAlignmentX(0.5f);
 		add(delayLabel);
@@ -37,7 +39,8 @@ public class MouseView extends JPanel {
 		delay.setValue(1);
 		delay.setBorder(new EmptyBorder(10, 0, 10, 0));
 		add(delay);
-		delay.addChangeListener(new LabelUpdate(delayLabel, "ms", updateMouseDelay));
+		delay.addChangeListener(
+				new LabelUpdate(delayLabel, "ms", updateMouseDelay));
 
 		JLabel speedLabel = new JLabel("Max Mouse Movement Speed");
 		speedLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -53,7 +56,8 @@ public class MouseView extends JPanel {
 		speed.setValue(10);
 		speed.setBorder(new EmptyBorder(10, 0, 0, 0));
 		add(speed);
-		speed.addChangeListener(new LabelUpdate(speedLabel, "px", updateMouseMax));
+		speed.addChangeListener(
+				new LabelUpdate(speedLabel, "px", updateMouseMax));
 	}
 }
 

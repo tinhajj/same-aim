@@ -23,10 +23,10 @@ public class CounterView extends JPanel {
 	private JLabel lblDownCounter;
 
 	public CounterView() {
-		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setBorder(null);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 100 };
-		gridBagLayout.rowHeights = new int[] { 50, 50 };
+		gridBagLayout.rowHeights = new int[] { 10, 10 };
 		gridBagLayout.columnWeights = new double[] { 0.0 };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0 };
 		setLayout(gridBagLayout);
@@ -35,12 +35,13 @@ public class CounterView extends JPanel {
 		down.setBorder(new TitledBorder(new EmptyBorder(0, 0, 0, 0), " ", TitledBorder.CENTER, TitledBorder.TOP, null,
 				new Color(0, 102, 0)));
 		GridBagConstraints gbc_down = new GridBagConstraints();
+		gbc_down.anchor = GridBagConstraints.NORTH;
 		gbc_down.gridx = 0;
 		gbc_down.gridy = 1;
 		add(down, gbc_down);
 		GridBagLayout gbl_down = new GridBagLayout();
 		gbl_down.columnWidths = new int[] { 100, 100 };
-		gbl_down.rowHeights = new int[] { 50 };
+		gbl_down.rowHeights = new int[] { 10 };
 		gbl_down.columnWeights = new double[] { 0.0, 0.0 };
 		gbl_down.rowWeights = new double[] { 0.0 };
 		down.setLayout(gbl_down);
@@ -63,12 +64,13 @@ public class CounterView extends JPanel {
 		left.setBorder(new TitledBorder(new EmptyBorder(0, 0, 0, 0), " ", TitledBorder.CENTER, TitledBorder.TOP, null,
 				new Color(0, 102, 0)));
 		GridBagConstraints gbc_left = new GridBagConstraints();
+		gbc_left.anchor = GridBagConstraints.NORTH;
 		gbc_left.gridx = 0;
 		gbc_left.gridy = 0;
 		add(left, gbc_left);
 		GridBagLayout gbl_left = new GridBagLayout();
 		gbl_left.columnWidths = new int[] { 100, 100 };
-		gbl_left.rowHeights = new int[] { 50 };
+		gbl_left.rowHeights = new int[] { 10 };
 		gbl_left.columnWeights = new double[] { 0.0, 0.0 };
 		gbl_left.rowWeights = new double[] { 0.0 };
 		left.setLayout(gbl_left);

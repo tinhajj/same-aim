@@ -3,11 +3,12 @@ package com.rotato.gui.view;
 import java.awt.AWTException;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -69,35 +70,52 @@ public class App {
 	private void initialize() throws AWTException {
 		frmSameAim = new JFrame();
 		frmSameAim.setTitle("Same Aim");
-		frmSameAim.setBounds(100, 100, 275, 500);
+		frmSameAim.setBounds(100, 100, 275, 410);
 		frmSameAim.setLocationRelativeTo(null);
 		frmSameAim.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel container = new JPanel();
-		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
+		Hotkey hotkeyModel = new Hotkey();
+		Counter counterModel = new Counter();
+
+		frmSameAim.getContentPane().add(container, BorderLayout.CENTER);
+		GridBagLayout gbl_container = new GridBagLayout();
+		gbl_container.columnWidths = new int[] { 259 };
+		gbl_container.rowHeights = new int[] { 75, 75, 132 };
+		gbl_container.columnWeights = new double[] { 0.0 };
+		gbl_container.rowWeights = new double[] { 0.0, 0.0, 0.0 };
+		container.setLayout(gbl_container);
+
+		CounterView counterView = new CounterView();
+		CounterController counterController = new CounterController(counterModel, counterView);
 
 		HotkeyView hotkeyView = new HotkeyView(frmSameAim);
 		hotkeyView.setBorder(null);
-		Hotkey hotkeyModel = new Hotkey();
+		HotkeyController hotkeyController = new HotkeyController(hotkeyModel, hotkeyView, counterController);
 
-		CounterView counterView = new CounterView();
+		GridBagConstraints gbc_hotkeyView = new GridBagConstraints();
+		gbc_hotkeyView.insets = new Insets(0, 0, 5, 0);
+		gbc_hotkeyView.gridx = 0;
+		gbc_hotkeyView.gridy = 0;
+		container.add(hotkeyView, gbc_hotkeyView);
+
 		GridBagLayout gridBagLayout = (GridBagLayout) counterView.getLayout();
 		gridBagLayout.columnWidths = new int[] { 50 };
 		gridBagLayout.rowHeights = new int[] { 10, 10 };
-		counterView.setBorder(null);
-		Counter counterModel = new Counter();
+		counterView.setBorder(new EmptyBorder(0, 0, 10, 0));
+
+		GridBagConstraints gbc_counterView = new GridBagConstraints();
+		gbc_counterView.insets = new Insets(0, 0, 5, 0);
+		gbc_counterView.gridx = 0;
+		gbc_counterView.gridy = 1;
+		container.add(counterView, gbc_counterView);
 
 		MouseView mouseView = new MouseView();
 		mouseView.setBorder(new EmptyBorder(0, 5, 0, 5));
-
-		CounterController counterController = new CounterController(counterModel, counterView);
-		HotkeyController hotkeyController = new HotkeyController(hotkeyModel, hotkeyView, counterController);
-
-		frmSameAim.getContentPane().add(container, BorderLayout.CENTER);
-
-		container.add(hotkeyView);
-		container.add(counterView);
-		container.add(mouseView);
+		GridBagConstraints gbc_mouseView = new GridBagConstraints();
+		gbc_mouseView.gridx = 0;
+		gbc_mouseView.gridy = 2;
+		container.add(mouseView, gbc_mouseView);
 	}
 
 }

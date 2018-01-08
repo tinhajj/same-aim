@@ -2,7 +2,9 @@
 
 A tool to help find relative mouse sensitivities between two 3d games
 
-![Screenshot](https://i.imgur.com/XSUe5d7.png "Application Screenshot")
+![Screenshot](https://i.imgur.com/K5qtWSP.png "Application Screenshot")
+
+
 
 Install Instructions
 * Ensure you have java installed and it is in your path/environment variables somewhere

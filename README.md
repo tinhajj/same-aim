@@ -7,6 +7,7 @@ Install Instructions
 * Go to the releases page and download the latest release.  The zip is generally for windows and the tar is generally for mac/linux.
 * Run same-aim.bat for windows or same-aim for mac/linux.
     * If you are on windows and you only see a prompt open and close very quickly, then you most likely do not have java in your path
+    * You can execute same-aim.bat from a terminal like powershell or cmd to see exactly what the error is
 
 Primarily works by:
 * setting up a hotkey to move left, down, and reseting the counter.

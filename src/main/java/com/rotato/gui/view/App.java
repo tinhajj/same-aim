@@ -29,7 +29,8 @@ public class App {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+		Logger logger = Logger
+				.getLogger(GlobalScreen.class.getPackage().getName());
 		logger.setLevel(Level.OFF);
 		logger.setUseParentHandlers(false);
 
@@ -70,7 +71,7 @@ public class App {
 	private void initialize() throws AWTException {
 		frmSameAim = new JFrame();
 		frmSameAim.setTitle("Same Aim");
-		frmSameAim.setBounds(100, 100, 275, 410);
+		frmSameAim.setBounds(100, 100, 300, 410);
 		frmSameAim.setLocationRelativeTo(null);
 		frmSameAim.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -80,18 +81,20 @@ public class App {
 
 		frmSameAim.getContentPane().add(container, BorderLayout.CENTER);
 		GridBagLayout gbl_container = new GridBagLayout();
-		gbl_container.columnWidths = new int[] { 259 };
-		gbl_container.rowHeights = new int[] { 75, 75, 132 };
-		gbl_container.columnWeights = new double[] { 0.0 };
-		gbl_container.rowWeights = new double[] { 0.0, 0.0, 0.0 };
+		gbl_container.columnWidths = new int[]{259};
+		gbl_container.rowHeights = new int[]{75, 75, 132};
+		gbl_container.columnWeights = new double[]{0.0};
+		gbl_container.rowWeights = new double[]{0.0, 0.0, 0.0};
 		container.setLayout(gbl_container);
 
 		CounterView counterView = new CounterView();
-		CounterController counterController = new CounterController(counterModel, counterView);
+		CounterController counterController = new CounterController(
+				counterModel, counterView);
 
 		HotkeyView hotkeyView = new HotkeyView(frmSameAim);
 		hotkeyView.setBorder(null);
-		HotkeyController hotkeyController = new HotkeyController(hotkeyModel, hotkeyView, counterController);
+		HotkeyController hotkeyController = new HotkeyController(hotkeyModel,
+				hotkeyView, counterController);
 
 		GridBagConstraints gbc_hotkeyView = new GridBagConstraints();
 		gbc_hotkeyView.insets = new Insets(0, 0, 5, 0);
@@ -100,8 +103,8 @@ public class App {
 		container.add(hotkeyView, gbc_hotkeyView);
 
 		GridBagLayout gridBagLayout = (GridBagLayout) counterView.getLayout();
-		gridBagLayout.columnWidths = new int[] { 50 };
-		gridBagLayout.rowHeights = new int[] { 10, 10 };
+		gridBagLayout.columnWidths = new int[]{50};
+		gridBagLayout.rowHeights = new int[]{10, 10};
 		counterView.setBorder(new EmptyBorder(0, 0, 10, 0));
 
 		GridBagConstraints gbc_counterView = new GridBagConstraints();

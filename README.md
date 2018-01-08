@@ -2,7 +2,7 @@
 
 A tool to help find relative mouse sensitivities between two 3d games
 
-![Screenshot](https://i.imgur.com/K5qtWSP.png "Application Screenshot")
+![Screenshot](https://i.imgur.com/w9Kzj2U.png "Application Screenshot")
 
 
 

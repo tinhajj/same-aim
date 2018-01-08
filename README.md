@@ -2,6 +2,8 @@
 
 A tool to help find relative mouse sensitivities between two 3d games
 
+![alt text](https://i.imgur.com/XSUe5d7.png Application Screenshot)
+
 Install Instructions
 * Ensure you have java installed and it is in your path/environment variables somewhere
 * Go to the releases page and download the latest release.  The zip is generally for windows and the tar is generally for mac/linux.

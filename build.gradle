@@ -6,6 +6,14 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+	main {
+		resources {
+			srcDir 'resources'
+		}
+	}
+}
+
 dependencies {
     implementation 'com.google.guava:guava:21.0'
     compile group: 'com.1stleg', name: 'jnativehook', version: '2.1.0'

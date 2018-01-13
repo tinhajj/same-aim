@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -71,25 +72,35 @@ public class App {
 	private void initialize() throws AWTException {
 		frmSameAim = new JFrame();
 		frmSameAim.setTitle("Same Aim");
-		frmSameAim.setBounds(100, 100, 300, 410);
+		frmSameAim.setBounds(100, 100, 300, 525);
 		frmSameAim.setLocationRelativeTo(null);
 		frmSameAim.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		frmSameAim.setIconImage(Toolkit.getDefaultToolkit()
+				.createImage(ClassLoader.getSystemResource("SameAimIcon.png")));
 
 		JPanel container = new JPanel();
 		Hotkey hotkeyModel = new Hotkey();
 		Counter counterModel = new Counter();
 
-		frmSameAim.getContentPane().add(container, BorderLayout.CENTER);
-		GridBagLayout gbl_container = new GridBagLayout();
-		gbl_container.columnWidths = new int[]{259};
-		gbl_container.rowHeights = new int[]{75, 75, 132};
-		gbl_container.columnWeights = new double[]{0.0};
-		gbl_container.rowWeights = new double[]{0.0, 0.0, 0.0};
-		container.setLayout(gbl_container);
-
 		CounterView counterView = new CounterView();
 		CounterController counterController = new CounterController(
 				counterModel, counterView);
+
+		frmSameAim.getContentPane().add(container, BorderLayout.NORTH);
+		GridBagLayout gbl_container = new GridBagLayout();
+		gbl_container.columnWidths = new int[]{259};
+		gbl_container.rowHeights = new int[]{0, 75, 75, 75, 0, 132};
+		gbl_container.columnWeights = new double[]{0.0};
+		gbl_container.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0};
+		container.setLayout(gbl_container);
+
+		LogoView logoView = new LogoView();
+		GridBagConstraints gbc_logoView = new GridBagConstraints();
+		gbc_logoView.insets = new Insets(0, 0, 5, 0);
+		gbc_logoView.gridx = 0;
+		gbc_logoView.gridy = 1;
+		container.add(logoView, gbc_logoView);
 
 		HotkeyView hotkeyView = new HotkeyView(frmSameAim);
 		hotkeyView.setBorder(null);
@@ -99,25 +110,26 @@ public class App {
 		GridBagConstraints gbc_hotkeyView = new GridBagConstraints();
 		gbc_hotkeyView.insets = new Insets(0, 0, 5, 0);
 		gbc_hotkeyView.gridx = 0;
-		gbc_hotkeyView.gridy = 0;
+		gbc_hotkeyView.gridy = 2;
 		container.add(hotkeyView, gbc_hotkeyView);
 
 		GridBagLayout gridBagLayout = (GridBagLayout) counterView.getLayout();
 		gridBagLayout.columnWidths = new int[]{50};
 		gridBagLayout.rowHeights = new int[]{10, 10};
-		counterView.setBorder(new EmptyBorder(0, 0, 10, 0));
+		counterView.setBorder(new EmptyBorder(0, 0, 15, 0));
 
 		GridBagConstraints gbc_counterView = new GridBagConstraints();
 		gbc_counterView.insets = new Insets(0, 0, 5, 0);
 		gbc_counterView.gridx = 0;
-		gbc_counterView.gridy = 1;
+		gbc_counterView.gridy = 3;
 		container.add(counterView, gbc_counterView);
 
 		MouseView mouseView = new MouseView();
 		mouseView.setBorder(new EmptyBorder(0, 5, 0, 5));
 		GridBagConstraints gbc_mouseView = new GridBagConstraints();
+		gbc_mouseView.insets = new Insets(0, 0, 5, 0);
 		gbc_mouseView.gridx = 0;
-		gbc_mouseView.gridy = 2;
+		gbc_mouseView.gridy = 4;
 		container.add(mouseView, gbc_mouseView);
 	}
 
